@@ -1,5 +1,6 @@
 import models.*;
 
+import javax.management.relation.RoleStatus;
 import java.security.InvalidAlgorithmParameterException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -81,15 +82,27 @@ public class DBConnector {
             // For ever tuple
             while (rs.next()) {
                 int eventID = rs.getInt(2);
+                // If event does not exist create the event
                 if (!events.contains(new Event(eventID))) {
-                    // If event does not exist create the event
+                    // Get list of roles for event
+                    PreparedStatement rolesStatement = con.prepareStatement(
+                      "SELECT * FROM EVENT_ROLES WHERE event_id = ?"
+                    );
+                    rolesStatement.setInt(1, eventID);
+                    ResultSet rolesSet = rolesStatement.executeQuery();
+                    List<Role> roles = new ArrayList<>();
+                    while (rolesSet.next()) {
+                        roles.add(new Role(rolesSet.getString(1), rolesSet.getString(2)));
+                    }
+                    // Add new event to list of events
                     List<EventSchedule> es = new ArrayList<>();
-                    events.add(new Event(rs.getInt(2), rs.getString(1), rs.getString(3), es));
+                    events.add(new Event(rs.getInt(2), rs.getString(1),
+                            rs.getString(3), es, roles));
                 }
                 // Create event schedule
                 EventSchedule es = new EventSchedule(rs.getTimestamp(4),
                         rs.getTimestamp(5), rs.getString(6),
-                        rs.getInt(7), new Role(rs.getString(9)), rs.getInt(8));
+                        rs.getInt(7), rs.getInt(8));
                 // Add event schedule to list of schedules for appropriate event
                 for (Event e : events) {
                     if (e.equals(new Event(eventID))) {
@@ -104,6 +117,9 @@ public class DBConnector {
         return events;
     }
 
+    /**
+     * Inserts a new concern to the volunter_concerns table given a concern to be inserted.
+     */
     public static boolean insertConcern(Concern concern){
 
         String query = "INSERT INTO volunteer_concerns (type, concern_description, user_id, event_id)" +

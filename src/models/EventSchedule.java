@@ -1,20 +1,19 @@
 package models;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class EventSchedule {
     private Timestamp start, end;
     private String location;
     private int limit;
-    private Role role;
     private int schedID;
 
-    public EventSchedule(Timestamp start, Timestamp end, String location, int limit, Role role, int schedID) {
+    public EventSchedule(Timestamp start, Timestamp end, String location, int limit, int schedID) {
         this.start = start;
         this.end = end;
         this.location = location;
         this.limit = limit;
-        this.role = role;
         this.schedID = schedID;
     }
 
@@ -57,9 +56,5 @@ public class EventSchedule {
     public void setLimit(int limit) {
         this.limit = limit;
     }
-
-    public Role getRole() { return role; }
-
-    public void setRole(Role role) { this.role = role; }
 
 }

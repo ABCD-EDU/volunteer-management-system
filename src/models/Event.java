@@ -8,6 +8,7 @@ public class Event {
     private String name;
     private String description;
     private List<EventSchedule> schedule;
+    private List<Role> roles;
 
     public Event(int eventId) {
         this.eventId = eventId;
@@ -16,11 +17,12 @@ public class Event {
         this.schedule = null;
     }
 
-    public Event(int eventId, String name, String desc, List<EventSchedule> sched) {
+    public Event(int eventId, String name, String desc, List<EventSchedule> sched, List<Role> roles) {
         this.eventId = eventId;
         this.name = name;
         this.description = desc;
         this.schedule = sched;
+        this.roles = roles;
     }
 
     public List<EventSchedule> getSchedule() {
