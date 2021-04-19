@@ -1,4 +1,5 @@
 import models.Event;
+import models.PersonalInfo;
 import models.User;
 import models.Volunteer;
 
@@ -11,7 +12,7 @@ public class Main {
             byte b = 123;
             DBConnector.setConnection();
             List<Event> events = DBConnector.getEventsOfVolunteer(
-                    new Volunteer(2201029, "hatdog", User.Type.VOLUNTEER, "hatdog", "hatdog", b, "hatdog", 2201017)
+                    new Volunteer(2201029, "hatdog", User.Type.VOLUNTEER, "hatdog", "hatdog", b, "hatdog", 2201017, new PersonalInfo())
                     , 2);
             System.out.println("events: " + events.size());
             for (Event e : events) {

@@ -126,7 +126,6 @@ public class DBConnector {
         }
     }
 
-
     public static void closeConnection() throws Exception {
         if (con != null) {
             con.close();

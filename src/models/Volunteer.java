@@ -7,14 +7,36 @@ public class Volunteer extends User{
     private String firstName, lastName;
     private byte year;
     private String degreeProgram;
+    PersonalInfo personalInfo;
 
-    public Volunteer(int id, String username, Type type, String fName, String lName, byte year, String degreeProgram, int userID) {
+    public Volunteer(int id, String username, Type type, String fName, String lName,
+                     byte year, String degreeProgram, int userID, PersonalInfo personalInfo) {
         super(id, username, type);
         this.firstName = fName;
         this.lastName = lName;
         this.year = year;
         this.degreeProgram = degreeProgram;
         this.userID = userID;
+        this.personalInfo = personalInfo;
+    }
+
+    public Volunteer(User user, String fName, String lName, byte year,
+                     String degreeProgram, int userID, PersonalInfo personalInfo) {
+        super(user);
+        this.firstName = fName;
+        this.lastName = lName;
+        this.year = year;
+        this.degreeProgram = degreeProgram;
+        this.userID = userID;
+        this.personalInfo = personalInfo;
+    }
+
+    public PersonalInfo getPersonalInfo() {
+        return personalInfo;
+    }
+
+    public void setPersonalInfo(PersonalInfo personalInfo) {
+        this.personalInfo = personalInfo;
     }
 
     public int getUserID() {
@@ -22,15 +44,6 @@ public class Volunteer extends User{
     }
 
     public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public Volunteer(User user, String fName, String lName, byte year, String degreeProgram, int userID) {
-        super(user);
-        this.firstName = fName;
-        this.lastName = lName;
-        this.year = year;
-        this.degreeProgram = degreeProgram;
         this.userID = userID;
     }
 

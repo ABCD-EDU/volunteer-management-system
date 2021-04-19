@@ -8,6 +8,8 @@ public class PersonalInfo {
     private String address;
     private String phoneNumber;
 
+    public PersonalInfo() { }
+
     public PersonalInfo(char gender, LocalDate birthDate, String address, String phoneNumber) {
         this.gender = gender;
         this.birthDate = birthDate;
