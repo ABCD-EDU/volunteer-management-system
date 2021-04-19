@@ -58,13 +58,11 @@ public class DBConnector {
                     "    s.dateTime_end s_end,\n" +
                     "    s.location s_location,\n" +
                     "    s.vol_limit s_limit,\n" +
-                    "    s.sched_id s_id,\n" +
-                    "    r.name r_name\n" +
+                    "    s.sched_id s_id\n" +
                     "FROM\n" +
                     "    volunteer_event_list AS v\n" +
                     "INNER JOIN events_schedule AS s USING(sched_id)\n" +
-                    "NATURAL JOIN EVENT AS e\n" +
-                    "INNER JOIN event_roles AS r USING(event_role_id)\n" +
+                    "NATURAL JOIN EVENT AS e \n" +
                     "WHERE\n" +
                     "    v.user_id = ?";
             PreparedStatement s = null;
