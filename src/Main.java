@@ -20,7 +20,7 @@ public class Main {
             }
 
 
-            DBConnector.insertConcern("inquiry", "How much is one potato?", 3,5);
+//            DBConnector.insertConcern("inquiry", "How much is one potato?", 3,5);
 
         }catch (Exception e) {
             e.printStackTrace();

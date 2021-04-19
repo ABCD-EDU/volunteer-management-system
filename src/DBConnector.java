@@ -1,7 +1,4 @@
-import models.Event;
-import models.EventSchedule;
-import models.Role;
-import models.Volunteer;
+import models.*;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.sql.*;
@@ -44,12 +41,12 @@ public class DBConnector {
      *      create an event object and add it into the list.
      *  2.2 Create a scheduleEvent object and add it into its appropriate event
      * 3. Return the list
-     * @param returnType an inputted value of:
+     * @param type an inputted value of:
      *                   0 - will return events a volunteer is volunteering for but is not yet verified to join
      *                   1 - will return events a volunteer is already verified to join
      *                   2 - will return all events a volunteer is part of
      */
-    public static List<Event> getEventsOfVolunteer(Volunteer volunteer, int returnType) {
+    public static List<Event> getEventsOfVolunteer(Volunteer v, int type) {
         List<Event> events = new ArrayList<>();
         try {
             String query = "SELECT\n" +
@@ -70,16 +67,16 @@ public class DBConnector {
                     "WHERE\n" +
                     "    v.user_id = ?";
             PreparedStatement s = null;
-            if (returnType == 2) {
+            if (type == 2) {
                 s = con.prepareStatement(query);
-            }else if (returnType == 1 | returnType == 0) {
+            }else if (type == 1 | type == 0) {
                 query = query + " AND v.is_verified = ?";
                 s = con.prepareStatement(query);
-                s.setInt(2, returnType);
+                s.setInt(2, type);
             }else {
                 throw new IllegalArgumentException();
             }
-            s.setInt(1, volunteer.getId());
+            s.setInt(1, v.getId());
             ResultSet rs = s.executeQuery();
             // For ever tuple
             while (rs.next()) {
@@ -107,16 +104,16 @@ public class DBConnector {
         return events;
     }
 
-    public static boolean insertConcern(String concernType, String concernDescription, int userID, int eventID){
+    public static boolean insertConcern(Concern concern){
 
         String query = "INSERT INTO volunteer_concerns (type, concern_description, user_id, event_id)" +
                 "VALUES (?, ?, ?, ?)";
         try(PreparedStatement statement = DBConnector.con.prepareStatement(query)){
 
-            statement.setString(1,concernType);
-            statement.setString(2, concernDescription);
-            statement.setInt(3,userID);
-            statement.setInt(4, eventID);
+            statement.setString(1,concern.getType());
+            statement.setString(2, concern.getDesc());
+            statement.setInt(3, concern.getUserID());
+            statement.setInt(4, concern.getEventID());
 
             statement.executeUpdate();
             return true;
