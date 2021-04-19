@@ -7,22 +7,12 @@ public class Event {
     private String name;
     private String description;
     private List<EventSchedule> schedule;
-    private List<Role> roles;
 
-    private Event(int eventId, String name, String desc, List<EventSchedule> sched, List<Role> roles) {
+    private Event(int eventId, String name, String desc, List<EventSchedule> sched) {
         this.eventId = eventId;
         this.name = name;
         this.description = desc;
         this.schedule = sched;
-        this.roles = roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
     }
 
     public List<EventSchedule> getSchedule() {
