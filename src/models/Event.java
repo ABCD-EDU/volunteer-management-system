@@ -1,6 +1,7 @@
 package models;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Event {
     private int eventId;
@@ -8,7 +9,14 @@ public class Event {
     private String description;
     private List<EventSchedule> schedule;
 
-    private Event(int eventId, String name, String desc, List<EventSchedule> sched) {
+    public Event(int eventId) {
+        this.eventId = eventId;
+        this.name = null;
+        this.description = null;
+        this.schedule = null;
+    }
+
+    public Event(int eventId, String name, String desc, List<EventSchedule> sched) {
         this.eventId = eventId;
         this.name = name;
         this.description = desc;
@@ -45,5 +53,26 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void addSchedule(EventSchedule eventSchedule) {
+        schedule.add(eventSchedule);
+    }
+
+    public void removeSchedule(EventSchedule eventSchedule) {
+        schedule.remove(eventSchedule);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return eventId == event.eventId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventId);
     }
 }

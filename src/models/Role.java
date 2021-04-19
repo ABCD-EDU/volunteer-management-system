@@ -4,6 +4,15 @@ public class Role {
     private String name, desc;
     private boolean needsAuth;
 
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public Role(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
+    }
+
     public Role(String name, String desc, boolean needsAuth) {
         this.name = name;
         this.desc = desc;
