@@ -24,7 +24,7 @@ public class DBConnector {
 
     public static void setConnection() throws Exception {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             con =  DriverManager.getConnection("jdbc:mysql://localhost/" + DATABASE_NAME + "?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false"
                     ,"root", "");
             System.out.println("DATABASE CONNECTION SUCCESSFUL");
@@ -105,6 +105,25 @@ public class DBConnector {
             e.printStackTrace();
         }
         return events;
+    }
+
+    public static boolean insertConcern(String concernType, String concernDescription, int userID, int eventID){
+
+        String query = "INSERT INTO volunteer_concerns (type, concern_description, user_id, event_id)" +
+                "VALUES (?, ?, ?, ?)";
+        try(PreparedStatement statement = DBConnector.con.prepareStatement(query)){
+
+            statement.setString(1,concernType);
+            statement.setString(2, concernDescription);
+            statement.setInt(3,userID);
+            statement.setInt(4, eventID);
+
+            statement.executeUpdate();
+            return true;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
 

@@ -17,6 +17,10 @@ public class Main {
             for (Event e : events) {
                 System.out.println(e.getName() + " - schedules: " + e.getSchedule().size());
             }
+
+
+            DBConnector.insertConcern("inquiry", "How much is one potato?", 3,5);
+
         }catch (Exception e) {
             e.printStackTrace();
         }
