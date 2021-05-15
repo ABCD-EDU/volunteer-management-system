@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" layoutX="236.0" prefHeight="768.0" prefWidth="895.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="384.0">
+               <children>
+                  <StackPane prefHeight="59.0" prefWidth="61.0">
+                     <children>
+                        <Circle fill="#227c9d" radius="18.0" stroke="#227c9d" strokeType="INSIDE" />
+                        <Label text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="59.0" prefWidth="61.0">
+                     <children>
+                        <Circle fill="#227b9c00" radius="18.0" stroke="#227c9d" strokeType="INSIDE" />
+                        <Label text="2" textFill="#227c9d">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
+            <HBox prefHeight="51.0" prefWidth="384.0" style="-fx-alignment: center;">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="51.0" prefWidth="322.0" text="Login Credentials" textAlignment="CENTER" textFill="#227b9c">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="303.0" prefWidth="895.0">
+               <children>
+                  <VBox prefHeight="481.0" prefWidth="296.0">
+                     <children>
+                        <HBox prefHeight="7.0" prefWidth="100.0">
+                           <children>
+                              <Label text="First Name" textFill="#227b9cc4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="7.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Last Name" textFill="#227b9cc4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="7.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Sex" textFill="#227b9cc4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="7.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Birth Date" textFill="#227b9cc4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="7.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Email" textFill="#227b9cc4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="481.0" prefWidth="296.0">
+                     <children>
+                        <HBox prefHeight="7.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Phone Number" textFill="#227b9cc4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="7.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Volunteer Type" textFill="#227b9cc4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="7.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Degree Program" textFill="#227b9cc4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="7.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Collegiate Year" textFill="#227b9cc4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="7.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Address" textFill="#227b9cc4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="74.0" prefWidth="895.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="330.0" style="-fx-background-color: #0BB180;" text="CREATE ACCOUNT" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="384.0" style="-fx-alignment: center;">
+               <children>
+                  <Label text="already have an account" textFill="#227c9d">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
