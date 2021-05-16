@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,8 +9,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignInScreenController">
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" layoutX="491.0" prefHeight="768.0" prefWidth="384.0">
          <children>
@@ -27,7 +28,7 @@
             </HBox>
             <HBox prefHeight="51.0" prefWidth="175.0" style="-fx-border-color: FFCB77; -fx-border-width: 0 0 3 0;">
                <children>
-                  <Label contentDisplay="CENTER" prefHeight="73.0" prefWidth="422.0" text="Username" textFill="#227b9cad">
+                  <Label fx:id="username_field" contentDisplay="CENTER" prefHeight="73.0" prefWidth="422.0" text="Username" textFill="#227b9cad">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -39,7 +40,7 @@
             </HBox>
             <HBox prefHeight="51.0" prefWidth="175.0" style="-fx-border-color: FFCB77; -fx-border-width: 0 0 3 0;">
                <children>
-                  <Label prefHeight="98.0" prefWidth="552.0" text="Password" textFill="#227b9cad">
+                  <Label fx:id="password_field" prefHeight="98.0" prefWidth="552.0" text="Password" textFill="#227b9cad">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -51,19 +52,25 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center;">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="330.0" style="-fx-background-color: #227C9D;" text="LOGIN" textFill="WHITE">
+                  <Button fx:id="login_button" mnemonicParsing="false" onAction="#onLogin" prefHeight="38.0" prefWidth="330.0" style="-fx-background-color: #227C9D;" text="LOGIN" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </HBox>
             <HBox prefHeight="25.0" prefWidth="384.0" style="-fx-alignment: center;">
                <children>
-                  <Label text="create an account &gt;" textFill="#227c9d">
+                  <Label fx:id="signup_button" onMouseClicked="#onSignUpPress" text="create an account &gt;" textFill="#227c9d">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
                </children>
             </HBox>
