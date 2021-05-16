@@ -18,6 +18,7 @@
    <children>
       <VBox alignment="CENTER" layoutX="236.0" prefHeight="768.0" prefWidth="895.0">
          <children>
+            <Label fx:id="warning_label" text="Label" textFill="#d02b2b" visible="false" />
             <HBox alignment="CENTER" prefHeight="59.0" prefWidth="384.0">
                <children>
                   <StackPane prefHeight="59.0" prefWidth="61.0">
@@ -44,7 +45,7 @@
             </HBox>
             <HBox prefHeight="51.0" prefWidth="384.0" style="-fx-alignment: center;">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="51.0" prefWidth="322.0" text="Login Credentials" textAlignment="CENTER" textFill="#227b9c">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="51.0" prefWidth="322.0" text="User Information" textAlignment="CENTER" textFill="#227b9c">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>

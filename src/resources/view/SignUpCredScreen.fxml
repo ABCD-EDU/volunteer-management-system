@@ -16,6 +16,7 @@
    <children>
       <VBox alignment="CENTER" layoutX="491.0" prefHeight="768.0" prefWidth="384.0">
          <children>
+            <Label fx:id="warning_label" text="Label" textFill="#d73b3b" visible="false" />
             <HBox alignment="CENTER" prefHeight="59.0" prefWidth="384.0">
                <children>
                   <StackPane prefHeight="59.0" prefWidth="61.0">

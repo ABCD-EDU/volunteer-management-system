@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -13,6 +15,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import models.User;
 import models.Volunteer;
@@ -29,6 +32,9 @@ public class SignUpInfoScreen implements Initializable {
 
     private String username;
     private String password;
+
+    @FXML
+    private Label warning_label;
 
     @FXML
     private TextField fName_field;
@@ -68,16 +74,81 @@ public class SignUpInfoScreen implements Initializable {
 
     @FXML
     void onCreateAccount(ActionEvent event) {
+        if (fName_field.getText().trim().isBlank() || lName_field.getText().trim().isBlank()
+                || phone_field.getText().trim().isBlank() || address_field.getText().isBlank()
+                || sex_field.getValue() == null || type_field.getValue() == null) {
+            warning_label.setText("Please fill in all input fields.");
+            warning_label.setVisible(true);
+            return;
+        }
+
+        try {
+            String number = phone_field.getText().trim();
+            Integer.parseInt(number);
+            if (phone_field.getText().trim().length() != 11) {
+                warning_label.setText("Inputted phone number is malformed");
+                return;
+            }
+        }catch (NumberFormatException e) {
+            warning_label.setText("Inputted phone number is malformed");
+            return;
+        }
+
+        if (type_field.getValue().equals(Volunteer.Type.STUDENT)) {
+            if (program_field.getValue() == null) {
+                warning_label.setText("Please indicate your degree program.");
+                warning_label.setVisible(true);
+            }
+            if (year_field.getValue() == null) {
+                warning_label.setText("Please indicate your collegiate year.");
+                warning_label.setVisible(true);
+            }
+            return;
+        }
+
         Volunteer volunteer = new Volunteer(
                 username, password, User.Type.VOLUNTEER, fName_field.getText(), lName_field.getText(),
                 Date.valueOf(date_picker.getValue().toString()),"address hatdog",
                 Integer.parseInt(phone_field.getText()), Volunteer.Type.STUDENT, year_field.getValue(),
                 program_field.getValue(), Volunteer.Sex.FEMALE);
-        DBConnector.register(volunteer);
+
+        if (DBConnector.register(volunteer)) {
+            showSuccessfulRegistration(username);
+        }else {
+            warning_label.setText("Internal error while trying to sign up user.");
+            warning_label.setVisible(true);
+        }
+    }
+
+    private void showSuccessfulRegistration(String username) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../resources/view/SuccessfulRegistrationScreen.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Successful registration");
+
+            for (Node component : ((Pane) root).getChildren()) {
+                if (component.getId() != null) {
+                    if (component.getId().equals("username_label"))
+                        ((Label) component).setText(username);
+                    if (component.getId().equals("okay_button")) {
+                        component.setOnMouseClicked(e -> {
+                            stage.close();
+                            swapToLoginScreen();
+                        });
+                    }
+                }
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void onGoBack(MouseEvent event) {
+        swapToLoginScreen();
+    }
+
+    private void swapToLoginScreen() {
         try {
             Stage window = (Stage)goback_label.getScene().getWindow();
             window.setScene(new Scene(FXMLLoader.load(getClass()

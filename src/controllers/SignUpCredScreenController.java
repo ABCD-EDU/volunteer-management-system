@@ -1,5 +1,6 @@
 package controllers;
 
+import client.DBConnector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SignUpCredScreenController {
+
+    @FXML
+    private Label warning_label;
 
     @FXML
     private TextArea username_field;
@@ -45,17 +49,32 @@ public class SignUpCredScreenController {
     @FXML
     void onNext(ActionEvent event) {
         try {
-//            FXMLLoader loader = FXMLLoader.load(getClass().getClassLoader().getResource("../resources/view/SignUpInfoScreen.fxml"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/view/SignUpInfoScreen.fxml"));
             SignUpInfoScreen controller = new SignUpInfoScreen();
 
-            // TODO: input validation if username is already taken
-            controller.setUsername(username_field.getText().trim());
+            String username = username_field.getText().trim();
+            String password = password_field.getText().trim();
+            String cPassword = cpassword_field.getText().trim();
 
-            if (password_field.getText().trim().equals(cpassword_field.getText().trim())) {
-                controller.setPassword(password_field.getText());
+            if (username.isBlank() || password.isBlank() || cPassword.isBlank()) {
+                warning_label.setText("Please fill in all input fields.");
+                warning_label.setVisible(true);
+                return;
+            }
+
+            if (DBConnector.usernameIsAvailable(username))
+                controller.setUsername(username);
+            else {
+                warning_label.setText("username is already taken");
+                warning_label.setVisible(true);
+                return;
+            }
+
+            if (password.equals(cPassword)) {
+                controller.setPassword(password);
             }else {
-                // TODO: input validation response to user
+                warning_label.setText("Passwords do not match");
+                warning_label.setVisible(true);
                 return;
             }
 

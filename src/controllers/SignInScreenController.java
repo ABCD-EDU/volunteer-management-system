@@ -7,19 +7,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+
 
 public class SignInScreenController {
 
     @FXML
-    private Label username_field;
+    private Label warning_label;
 
     @FXML
-    private Label password_field;
+    private TextField username_field;
+
+    @FXML
+    private TextField password_field;
 
     @FXML
     private Button login_button;
@@ -27,8 +32,48 @@ public class SignInScreenController {
     @FXML
     private Label signup_button;
 
+    /**
+     * Algorithm:
+     * 1. Check if all fields are not empty
+     * 2. Check if username exist
+     * 3. Check if password is correct
+     */
     @FXML
     void onLogin(ActionEvent event) {
+        String username = username_field.getText().trim();
+        String password = password_field.getText().trim();
+
+        // check if fields are empty
+        if (username.isBlank() || password.isBlank()) {
+            if (username.isBlank())
+                warning_label.setText("Username field is blank");
+            else
+                warning_label.setText("password field is blank");
+            warning_label.setVisible(true);
+            return;
+        }else {
+            warning_label.setText("");
+            warning_label.setVisible(false);
+        }
+
+        int response = DBConnector.login(username, password);
+        if (response == 1) {
+            System.out.println("Successful user log in");
+            initializeLogin(username);
+            return;
+        }
+        if (response == 2)
+            System.out.println("Administrator login");
+        if (response == -2)
+            warning_label.setText("There was an error while logging in");
+        if (response == -1)
+            warning_label.setText("Username does not exist");
+        if (response == 0)
+            warning_label.setText("Username and password does not match");
+        warning_label.setVisible(true);
+    }
+
+    private void initializeLogin(String username) {
 
     }
 
@@ -44,6 +89,5 @@ public class SignInScreenController {
             e.printStackTrace();
         }
     }
-
 
 }
