@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" layoutX="236.0" prefHeight="768.0" prefWidth="895.0">
          <children>
@@ -57,7 +57,7 @@
                   <Insets bottom="15.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="206.0" prefWidth="895.0">
+            <HBox alignment="CENTER" prefHeight="303.0" prefWidth="895.0">
                <children>
                   <VBox prefHeight="481.0" prefWidth="296.0">
                      <children>
@@ -106,11 +106,7 @@
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
-<<<<<<< HEAD
-                              <ComboBox prefHeight="25.0" prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
-=======
-                              <TextField fx:id="sex_field" prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
->>>>>>> f4580ae1495f3dd1f47d3708603bb236fd25021b
+                              <ComboBox prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
                         <HBox prefHeight="7.0" prefWidth="100.0">
@@ -125,13 +121,9 @@
                               </Label>
                            </children>
                         </HBox>
-<<<<<<< HEAD
-                        <HBox prefHeight="17.0" prefWidth="100.0" />
-                        <DatePicker prefHeight="25.0" prefWidth="257.0" style="-fx-background-color: fff; -fx-border-width: 2; -fx-border-color: FFCB77;" />
-=======
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
-                              <TextField fx:id="bday_field" prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                              <DatePicker prefHeight="25.0" prefWidth="257.0" style="-fx-background-color: ffff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
                         <HBox prefHeight="7.0" prefWidth="100.0">
@@ -151,7 +143,6 @@
                               <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
->>>>>>> f4580ae1495f3dd1f47d3708603bb236fd25021b
                      </children>
                   </VBox>
                   <VBox prefHeight="481.0" prefWidth="296.0">
@@ -184,7 +175,7 @@
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
-                              <ComboBox prefHeight="25.0" prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
+                              <ComboBox prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
                         <HBox prefHeight="7.0" prefWidth="100.0">
@@ -201,11 +192,7 @@
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
-<<<<<<< HEAD
-                              <ComboBox prefHeight="25.0" prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
-=======
-                              <TextField fx:id="dprogram_field" prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
->>>>>>> f4580ae1495f3dd1f47d3708603bb236fd25021b
+                              <ComboBox prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
                         <HBox prefHeight="7.0" prefWidth="100.0">
@@ -222,10 +209,7 @@
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
-<<<<<<< HEAD
                               <ComboBox prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
-=======
-                              <TextField fx:id="year_field" prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
                         <HBox prefHeight="7.0" prefWidth="100.0">
@@ -243,34 +227,12 @@
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
                               <TextField fx:id="address_field" prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
->>>>>>> f4580ae1495f3dd1f47d3708603bb236fd25021b
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <VBox alignment="CENTER" prefHeight="51.0" prefWidth="895.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="7.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Address" textFill="#227b9cc4">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets top="10.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="17.0" prefWidth="100.0">
-                     <children>
-                        <TextField prefHeight="19.0" prefWidth="388.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
             <HBox alignment="CENTER" prefHeight="74.0" prefWidth="895.0">
                <children>
                   <Button fx:id="create_button" mnemonicParsing="false" onAction="#onCreateAccount" prefHeight="38.0" prefWidth="330.0" style="-fx-background-color: #0BB180;" text="CREATE ACCOUNT" textFill="WHITE">
