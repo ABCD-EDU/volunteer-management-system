@@ -1,8 +1,11 @@
+package client;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import models.Concern;
 
 public class ClientExecutable extends Application {
 
@@ -19,6 +22,7 @@ public class ClientExecutable extends Application {
     public static void main(String[] args) {
         try {
             DBConnector.setConnection();
+            DBConnector.insertConcern(new Concern(Concern.Type.INQUIRY.getType(), "hatdog", 1,1));
             launch(args);
         }catch (Exception e) {
             e.printStackTrace();

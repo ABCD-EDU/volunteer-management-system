@@ -1,5 +1,6 @@
 package controllers;
 
+import client.DBConnector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SignInScreenController {
-
 
     @FXML
     private Label username_field;

@@ -1,50 +1,121 @@
 package models;
 
 
-// VOLUNTEER_INFO(vol_id, first_name, last_name, birth_date,address, phone_number,year, degree_program, sex, user_id)
+import java.sql.Date;
+
 public class Volunteer extends User{
-    private int userID;
-    private String firstName, lastName;
-    private byte year;
+
+    private int volId;
+    private String firstName;
+    private String lastName;
+    private Date birthDate;
+    private String address;
+    private int phone_number;
+    private Type type;
+    private int year;
     private String degreeProgram;
-    PersonalInfo personalInfo;
+    private Sex sex;
+    private int userId;
 
-    public Volunteer(int id, String username, Type type, String fName, String lName,
-                     byte year, String degreeProgram, int userID, PersonalInfo personalInfo) {
-        super(id, username, type);
-        this.firstName = fName;
-        this.lastName = lName;
+    public enum Sex {
+        MALE("male"),
+        FEMALE("female");
+
+        private final String sex;
+
+        Sex(String sex) {
+            this.sex = sex;
+        }
+
+        public String getSex() {
+            return sex;
+        }
+    }
+
+    public enum Type {
+        STUDENT("student"),
+        FACULTY("faculty");
+
+        private final String type;
+
+        Type(String type) {
+            this.type = type;
+        }
+
+        public String getType() {
+            return type;
+        }
+    }
+
+    public Volunteer(int userId, String username, String password, User.Type type, int volId, String firstName,
+                     String lastName, Date birthDate, String address, int phone_number, Type type1, int year, String degreeProgram, Sex sex, int userId1) {
+        super(userId, username, password, type);
+        this.volId = volId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.phone_number = phone_number;
+        this.type = type1;
         this.year = year;
         this.degreeProgram = degreeProgram;
-        this.userID = userID;
-        this.personalInfo = personalInfo;
+        this.sex = sex;
+        this.userId = userId1;
     }
 
-    public Volunteer(User user, String fName, String lName, byte year,
-                     String degreeProgram, int userID, PersonalInfo personalInfo) {
-        super(user);
-        this.firstName = fName;
-        this.lastName = lName;
+    public Volunteer(String username, String password, User.Type type, int volId, String firstName, String lastName,
+                     Date birthDate, String address, int phone_number, Type type1, int year, String degreeProgram, Sex sex, int userId) {
+        super(username, password, type);
+        this.volId = volId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.phone_number = phone_number;
+        this.type = type1;
         this.year = year;
         this.degreeProgram = degreeProgram;
-        this.userID = userID;
-        this.personalInfo = personalInfo;
+        this.sex = sex;
+        this.userId = userId;
     }
 
-    public PersonalInfo getPersonalInfo() {
-        return personalInfo;
+    public Volunteer(String username, String password, User.Type type, String firstName, String lastName,
+                     Date birthDate, String address, int phone_number, Type type1, int year, String degreeProgram, Sex sex, int userId) {
+        super(username, password, type);
+        this.volId = -1;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.phone_number = phone_number;
+        this.type = type1;
+        this.year = year;
+        this.degreeProgram = degreeProgram;
+        this.sex = sex;
+        this.userId = userId;
     }
 
-    public void setPersonalInfo(PersonalInfo personalInfo) {
-        this.personalInfo = personalInfo;
+    public Volunteer(String username, String password, User.Type type, String firstName, String lastName,
+                     Date birthDate, String address, int phone_number, Type type1, int year, String degreeProgram, Sex sex) {
+        super(username, password, type);
+        this.volId = -1;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.phone_number = phone_number;
+        this.type = type1;
+        this.year = year;
+        this.degreeProgram = degreeProgram;
+        this.sex = sex;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getVolId() {
+        return volId;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setVolId(int volId) {
+        this.volId = volId;
     }
 
     public String getFirstName() {
@@ -63,11 +134,43 @@ public class Volunteer extends User{
         this.lastName = lastName;
     }
 
-    public byte getYear() {
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(int phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public Volunteer.Type getVolType() {
+        return type;
+    }
+
+    public void setVolType(Volunteer.Type type) {
+        this.type = type;
+    }
+
+    public int getYear() {
         return year;
     }
 
-    public void setYear(byte year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -77,5 +180,23 @@ public class Volunteer extends User{
 
     public void setDegreeProgram(String degreeProgram) {
         this.degreeProgram = degreeProgram;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    @Override
+    public int getUserId() {
+        return userId;
+    }
+
+    @Override
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

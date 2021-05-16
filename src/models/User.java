@@ -2,13 +2,15 @@ package models;
 
 // USER_ACC(user_id, username, password, type)
 public class User {
-    private int id;
+
+    private int userId;
     private String username;
+    private String password;
     private Type type;
 
     public enum Type {
-        VOLUNTEER("VOLUNTEER"),
-        ADMINISTRATOR("ADMINISTRATOR");
+        VOLUNTEER("volunteer"),
+        ADMIN("admin");
 
         private final String type;
 
@@ -21,32 +23,26 @@ public class User {
         }
     }
 
-    public User(int id, String username, Type type) {
-        this.id = id;
+    public User(int userId, String username, String password, Type type) {
+        this.userId = userId;
         this.username = username;
+        this.password = password;
         this.type = type;
     }
 
-    public User(User user) {
-        this.id = user.getId();
-        this.type = user.getType();
-        this.username = user.getUsername();
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
+    public User(String username, String password, Type type) {
+        this.userId = -1;
+        this.username = username;
+        this.password = password;
         this.type = type;
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -56,4 +52,31 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserType() {
+        return this.type.toString();
+    }
+
+    public void setUserType(Type type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", type=" + type +
+                '}';
+    }
+
 }

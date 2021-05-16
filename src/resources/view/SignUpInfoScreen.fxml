@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" layoutX="236.0" prefHeight="768.0" prefWidth="895.0">
          <children>
@@ -106,7 +106,7 @@
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
-                              <ComboBox prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
+                              <ComboBox fx:id="sex_field" prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
                         <HBox prefHeight="7.0" prefWidth="100.0">
@@ -123,7 +123,7 @@
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
-                              <DatePicker prefHeight="25.0" prefWidth="257.0" style="-fx-background-color: ffff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
+                              <DatePicker fx:id="date_picker" prefHeight="25.0" prefWidth="257.0" style="-fx-background-color: ffff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
                         <HBox prefHeight="7.0" prefWidth="100.0">
@@ -140,7 +140,7 @@
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
-                              <TextField prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
+                              <TextField fx:id="email_field" prefHeight="25.0" prefWidth="257.0" style="-fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
                      </children>
@@ -175,7 +175,7 @@
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
-                              <ComboBox prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
+                              <ComboBox fx:id="type_field" prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
                         <HBox prefHeight="7.0" prefWidth="100.0">
@@ -192,7 +192,7 @@
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
-                              <ComboBox prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
+                              <ComboBox fx:id="program_field" prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
                         <HBox prefHeight="7.0" prefWidth="100.0">
@@ -209,7 +209,7 @@
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="100.0">
                            <children>
-                              <ComboBox prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
+                              <ComboBox fx:id="year_field" prefWidth="257.0" style="-fx-background-color: fff; -fx-border-color: FFCB77; -fx-border-width: 2;" />
                            </children>
                         </HBox>
                         <HBox prefHeight="7.0" prefWidth="100.0">
