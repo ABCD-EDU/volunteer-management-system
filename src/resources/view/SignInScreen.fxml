@@ -21,7 +21,7 @@
             <Label fx:id="warning_label" alignment="CENTER" prefHeight="22.0" prefWidth="384.0" text="Label" textFill="#dd1616" visible="false" />
             <ImageView fitWidth="233.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/Event%20Planner.png" />
+                  <Image url="@../Event%20Planner.png" />
                </image>
                <viewport>
                   <Rectangle2D />
@@ -55,7 +55,7 @@
             </Label>
          </children>
          <padding>
-            <Insets bottom="40.0" />
+            <Insets bottom="50.0" />
          </padding>
       </VBox>
    </children>
