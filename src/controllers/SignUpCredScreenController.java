@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -20,13 +20,13 @@ public class SignUpCredScreenController {
     private Label warning_label;
 
     @FXML
-    private TextArea username_field;
+    private TextField username_field;
 
     @FXML
-    private TextArea password_field;
+    private TextField password_field;
 
     @FXML
-    private TextArea cpassword_field;
+    private TextField cpassword_field;
 
     @FXML
     private Button next_button;
@@ -90,6 +90,4 @@ public class SignUpCredScreenController {
             e.printStackTrace();
         }
     }
-
-
 }
