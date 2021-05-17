@@ -10,7 +10,7 @@ public class Volunteer extends User{
     private String lastName;
     private Date birthDate;
     private String address;
-    private int phone_number;
+    private Long phone_number;
     private Type type;
     private int year;
     private String degreeProgram;
@@ -48,7 +48,7 @@ public class Volunteer extends User{
     }
 
     public Volunteer(int userId, String username, String password, User.Type type, int volId, String firstName,
-                     String lastName, Date birthDate, String address, int phone_number, Type type1, int year, String degreeProgram, Sex sex, int userId1) {
+                     String lastName, Date birthDate, String address, Long phone_number, Type type1, int year, String degreeProgram, Sex sex, int userId1) {
         super(userId, username, password, type);
         this.volId = volId;
         this.firstName = firstName;
@@ -64,7 +64,7 @@ public class Volunteer extends User{
     }
 
     public Volunteer(String username, String password, User.Type type, int volId, String firstName, String lastName,
-                     Date birthDate, String address, int phone_number, Type type1, int year, String degreeProgram, Sex sex, int userId) {
+                     Date birthDate, String address, Long phone_number, Type type1, int year, String degreeProgram, Sex sex, int userId) {
         super(username, password, type);
         this.volId = volId;
         this.firstName = firstName;
@@ -80,7 +80,7 @@ public class Volunteer extends User{
     }
 
     public Volunteer(String username, String password, User.Type type, String firstName, String lastName,
-                     Date birthDate, String address, int phone_number, Type type1, int year, String degreeProgram, Sex sex, int userId) {
+                     Date birthDate, String address, Long phone_number, Type type1, int year, String degreeProgram, Sex sex, int userId) {
         super(username, password, type);
         this.volId = -1;
         this.firstName = firstName;
@@ -96,7 +96,7 @@ public class Volunteer extends User{
     }
 
     public Volunteer(String username, String password, User.Type type, String firstName, String lastName,
-                     Date birthDate, String address, int phone_number, Type type1, int year, String degreeProgram, Sex sex) {
+                     Date birthDate, String address, Long phone_number, Type type1, int year, String degreeProgram, Sex sex) {
         super(username, password, type);
         this.volId = -1;
         this.firstName = firstName;
@@ -150,11 +150,11 @@ public class Volunteer extends User{
         this.address = address;
     }
 
-    public int getPhone_number() {
+    public Long getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(int phone_number) {
+    public void setPhone_number(Long phone_number) {
         this.phone_number = phone_number;
     }
 

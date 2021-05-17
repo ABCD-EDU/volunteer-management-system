@@ -44,19 +44,23 @@ public class DBConnector {
 //
 //    }
 
-    public static ArrayList<Event> getJoinedEvents(int volId) {
+    public static ArrayList<Event> getOngoingJoinedEvents(int volId) {
         ArrayList<Event> events = new ArrayList<>();
         try {
             PreparedStatement statement = DBConnector.con.prepareStatement(
-                    "SELECT DISTINCT\n" +
-                            "    event_id,\n" +
-                            "    EVENT.name,\n" +
-                            "    EVENT.description\n" +
+                    "SELECT\n" +
+                            "    *\n" +
                             "FROM EVENT\n" +
-                            "INNER JOIN event_schedule USING(event_id)\n" +
-                            "INNER JOIN volunteer_event_list USING(sched_id)\n" +
                             "WHERE\n" +
-                            "    volunteer_event_list.vol_id = ?"
+                            "    event_id IN(\n" +
+                            "    SELECT DISTINCT\n" +
+                            "        event_schedule.event_id\n" +
+                            "    FROM\n" +
+                            "        event_schedule\n" +
+                            "    LEFT JOIN volunteer_event_list USING(sched_id)\n" +
+                            "    WHERE\n" +
+                            "        dateTime_end > CURRENT_TIMESTAMP AND vol_id = ?" +
+                            ")"
             );
             statement.setInt(1, volId);
             ResultSet rs = statement.executeQuery();
@@ -70,6 +74,67 @@ public class DBConnector {
         }
         return events;
     }
+
+    public static ArrayList<Event> getAllOngoingEvents(int volId) {
+        ArrayList<Event> events = new ArrayList<>();
+        try {
+            PreparedStatement statement = DBConnector.con.prepareStatement(
+                    "SELECT\n" +
+                            "    *\n" +
+                            "FROM EVENT\n" +
+                            "WHERE\n" +
+                            "    event_id IN(\n" +
+                            "    SELECT DISTINCT\n" +
+                            "        event_schedule.event_id\n" +
+                            "    FROM\n" +
+                            "        event_schedule\n" +
+                            "    LEFT JOIN volunteer_event_list USING(sched_id)\n" +
+                            "    WHERE\n" +
+                            "        dateTime_end > CURRENT_TIMESTAMP \n" +
+                            ")"
+            );
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Event e = new Event(rs.getInt(1), rs.getString(2), rs.getString(3));
+                events.add(e);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return events;
+    }
+
+//    public static ArrayList<Event> getFinishedJoinedEvents(int volId) {
+//        ArrayList<Event> events = new ArrayList<>();
+//        try {
+//            PreparedStatement statement = DBConnector.con.prepareStatement(
+//                    "SELECT\n" +
+//                            "    *\n" +
+//                            "FROM EVENT\n" +
+//                            "WHERE\n" +
+//                            "    event_id IN(\n" +
+//                            "    SELECT DISTINCT\n" +
+//                            "        event_schedule.event_id\n" +
+//                            "    FROM\n" +
+//                            "        event_schedule\n" +
+//                            "    LEFT JOIN volunteer_event_list USING(sched_id)\n" +
+//                            "    WHERE\n" +
+//                            "        dateTime_end > CURRENT_TIMESTAMP AND vol_id = ?" +
+//                            ")"
+//            );
+//            statement.setInt(1, volId);
+//            ResultSet rs = statement.executeQuery();
+//            while (rs.next()) {
+//                Event e = new Event(rs.getInt(1), rs.getString(2), rs.getString(3));
+//                events.add(e);
+//            }
+//        }catch (SQLException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//        return events;
+//    }
 
 
     /**
@@ -145,7 +210,7 @@ public class DBConnector {
             volStatement.setString(2, volunteer.getLastName());
             volStatement.setDate(3, volunteer.getBirthDate());
             volStatement.setString(4, volunteer.getAddress());
-            volStatement.setInt(5, volunteer.getPhone_number());
+            volStatement.setLong(5, volunteer.getPhone_number());
             volStatement.setString(6, volunteer.getVolType().toString());
             volStatement.setInt(7, volunteer.getYear());
             volStatement.setString(8, volunteer.getDegreeProgram());

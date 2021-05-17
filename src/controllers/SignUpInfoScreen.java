@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.User;
 import models.Volunteer;
@@ -74,6 +75,7 @@ public class SignUpInfoScreen implements Initializable {
 
     @FXML
     void onCreateAccount(ActionEvent event) {
+        System.out.println("onCreateAccount");
         if (fName_field.getText().trim().isBlank() || lName_field.getText().trim().isBlank()
                 || phone_field.getText().trim().isBlank() || address_field.getText().isBlank()
                 || sex_field.getValue() == null || type_field.getValue() == null) {
@@ -84,13 +86,16 @@ public class SignUpInfoScreen implements Initializable {
 
         try {
             String number = phone_field.getText().trim();
-            Integer.parseInt(number);
+            Long.parseLong(number);
             if (phone_field.getText().trim().length() != 11) {
                 warning_label.setText("Inputted phone number is malformed");
+                warning_label.setVisible(true);
                 return;
             }
         }catch (NumberFormatException e) {
+            e.printStackTrace();
             warning_label.setText("Inputted phone number is malformed");
+            warning_label.setVisible(true);
             return;
         }
 
@@ -98,19 +103,29 @@ public class SignUpInfoScreen implements Initializable {
             if (program_field.getValue() == null) {
                 warning_label.setText("Please indicate your degree program.");
                 warning_label.setVisible(true);
+                return;
             }
             if (year_field.getValue() == null) {
                 warning_label.setText("Please indicate your collegiate year.");
                 warning_label.setVisible(true);
+                return;
             }
-            return;
         }
 
-        Volunteer volunteer = new Volunteer(
+        Volunteer volunteer = null;
+
+        if (type_field.getValue().equals(Volunteer.Type.STUDENT))
+            volunteer = new Volunteer(
                 username, password, User.Type.VOLUNTEER, fName_field.getText(), lName_field.getText(),
-                Date.valueOf(date_picker.getValue().toString()),"address hatdog",
-                Integer.parseInt(phone_field.getText()), Volunteer.Type.STUDENT, year_field.getValue(),
-                program_field.getValue(), Volunteer.Sex.FEMALE);
+                Date.valueOf(date_picker.getValue().toString()),address_field.getText(),
+                Long.parseLong(phone_field.getText()), type_field.getValue(), year_field.getValue(),
+                program_field.getValue(), sex_field.getValue());
+        else
+            volunteer = new Volunteer(
+                    username, password, User.Type.VOLUNTEER, fName_field.getText(), lName_field.getText(),
+                    Date.valueOf(date_picker.getValue().toString()),address_field.getText(),
+                    Long.parseLong(phone_field.getText()), type_field.getValue(), -1,
+                    null, sex_field.getValue());
 
         if (DBConnector.register(volunteer)) {
             showSuccessfulRegistration(username);
@@ -128,6 +143,7 @@ public class SignUpInfoScreen implements Initializable {
 
             for (Node component : ((Pane) root).getChildren()) {
                 if (component.getId() != null) {
+                    System.out.println(component.getId());
                     if (component.getId().equals("username_label"))
                         ((Label) component).setText(username);
                     if (component.getId().equals("okay_button")) {
@@ -138,6 +154,9 @@ public class SignUpInfoScreen implements Initializable {
                     }
                 }
             }
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -170,7 +189,7 @@ public class SignUpInfoScreen implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<Integer> years = new ArrayList<>();
-        for (int i = 1; i < 11; i++)
+        for (int i = 1; i < 5; i++)
             years.add(i);
 
         List<Volunteer.Type> types =  new ArrayList<>();
