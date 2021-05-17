@@ -4,7 +4,8 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -12,141 +13,107 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpCredScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpCredScreenController">
    <children>
-      <VBox alignment="CENTER" layoutX="491.0" prefHeight="768.0" prefWidth="384.0">
+      <VBox alignment="TOP_CENTER" layoutX="524.0" prefHeight="720.0" prefWidth="233.0">
          <children>
-            <Label fx:id="warning_label" text="Label" textFill="#d73b3b" visible="false" />
-            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="384.0">
+            <HBox alignment="CENTER" spacing="30.0">
                <children>
-                  <StackPane prefHeight="59.0" prefWidth="61.0">
+                  <StackPane>
                      <children>
-                        <Circle fill="#227c9d" radius="18.0" stroke="#227c9d" strokeType="INSIDE" />
+                        <Circle fill="#227c9d" radius="13.0" stroke="#227c9d" strokeType="INSIDE" />
                         <Label text="1" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="15.0" />
+                              <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
                      </children>
                   </StackPane>
-                  <StackPane prefHeight="59.0" prefWidth="61.0">
+                  <StackPane>
                      <children>
-                        <Circle fill="#227b9c00" radius="18.0" stroke="#227c9d" strokeType="INSIDE" />
+                        <Circle fill="#227b9c00" radius="13.0" stroke="#227c9d" strokeType="INSIDE" />
                         <Label text="2" textFill="#227c9d">
                            <font>
-                              <Font name="System Bold" size="15.0" />
+                              <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
                      </children>
                   </StackPane>
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="110.0" />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="51.0" prefWidth="384.0" style="-fx-alignment: center;">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="73.0" prefWidth="422.0" style="-fx-text-alignment: center;" text="Login Credentials" textAlignment="CENTER" textFill="#227b9c">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                     <padding>
-                        <Insets left="15.0" />
-                     </padding>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="384.0">
-               <children>
-                  <Label prefHeight="25.0" prefWidth="100.0" text="Username" textFill="#227c9d">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="30.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="38.0" prefWidth="384.0" style="-fx-alignment: center;">
-               <children>
-                  <TextArea fx:id="username_field" prefHeight="38.0" prefWidth="329.0" style="-fx-border-color: FFCB77; -fx-border-width: 2; -fx-border-radius: 5;">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </TextArea>
-               </children>
+            <Label alignment="CENTER" text="Login Credentials" textFill="#227c9d">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label prefWidth="230.0" text="Username" textFill="#227c9d">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="2.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="username_field" prefHeight="30.0" style="-fx-background-color: #FEF9EF; -fx-border-color: #FFCB77; -fx-border-radius: 3; -fx-border-width: 2; -fx-text-fill: #227C9D;">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="384.0">
-               <children>
-                  <Label prefHeight="25.0" prefWidth="100.0" text="Password" textFill="#227c9d">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="30.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="7.0" prefWidth="384.0" style="-fx-alignment: center;">
-               <children>
-                  <TextArea fx:id="password_field" prefHeight="79.0" prefWidth="329.0" style="-fx-border-color: FFCB77; -fx-border-width: 2; -fx-border-radius: 5;">
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                  </TextArea>
-               </children>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </TextField>
+            <Label prefWidth="230.0" text="Password" textFill="#227c9d">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="2.0" />
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="password_field" style="-fx-background-color: #FEF9EF; -fx-border-color: #FFCB77; -fx-border-radius: 3; -fx-border-width: 2; -fx-text-fill: #227C9D;">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="384.0">
-               <children>
-                  <Label prefHeight="21.0" prefWidth="166.0" text="Confirm Password" textFill="#227c9d">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="30.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="38.0" prefWidth="384.0" style="-fx-alignment: center;">
-               <children>
-                  <TextArea fx:id="cpassword_field" prefHeight="38.0" prefWidth="329.0" style="-fx-border-color: FFCB77; -fx-border-width: 2; -fx-border-radius: 5;">
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                  </TextArea>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center;">
-               <children>
-                  <Button fx:id="next_button" mnemonicParsing="false" onAction="#onNext" prefHeight="38.0" prefWidth="330.0" style="-fx-background-color: #227C9D;" text="NEXT" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox prefHeight="25.0" prefWidth="384.0" style="-fx-alignment: center;">
-               <children>
-                  <Label fx:id="goback_label" onMouseClicked="#onGoBack" text="already have an account" textFill="#227c9d">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-               </children>
-            </HBox>
+            </PasswordField>
+            <Label prefWidth="230.0" text="Confirm Password" textFill="#227c9d">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="2.0" />
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="cpassword_field" style="-fx-background-color: #FEF9EF; -fx-border-color: #FFCB77; -fx-border-radius: 3; -fx-border-width: 2; -fx-text-fill: #227C9D;">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </PasswordField>
+            <Button fx:id="next_button" mnemonicParsing="false" onAction="#onNext" prefHeight="26.0" prefWidth="233.0" style="-fx-background-color: #227C9D;" text="NEXT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <VBox.margin>
+                  <Insets bottom="50.0" />
+               </VBox.margin>
+            </Button>
+            <Label fx:id="goback_label" onMouseClicked="#onGoBack" text="already have an account" textFill="#227c9d">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
          </children>
+         <padding>
+            <Insets bottom="40.0" />
+         </padding>
       </VBox>
    </children>
 </AnchorPane>
