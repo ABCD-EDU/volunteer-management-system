@@ -62,7 +62,7 @@ public class SignInScreenController {
             initializeLogin(username);
             return;
         }
-        if (response == 2)
+        if (response == 2) // implement administrator log in here
             System.out.println("Administrator login");
         if (response == -2)
             warning_label.setText("There was an error while logging in");
@@ -74,7 +74,14 @@ public class SignInScreenController {
     }
 
     private void initializeLogin(String username) {
-
+        try {
+            Stage window = (Stage)signup_button.getScene().getWindow();
+            window.setScene(new Scene(FXMLLoader.load(getClass()
+                    .getResource("../resources/view/AllEvents.fxml"))));
+            window.show();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

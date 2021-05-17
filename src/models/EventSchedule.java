@@ -1,28 +1,47 @@
 package models;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventSchedule {
-    private Timestamp start, end;
-    private String location;
-    private int limit;
-    private int schedID;
 
-    public EventSchedule(Timestamp start, Timestamp end, String location, int limit, int schedID) {
+    private int schedId;
+    private Timestamp start;
+    private Timestamp end;
+    private String location;
+    private int vol;
+    private int eventId;
+    private ArrayList<Role> roles;
+    private ArrayList<String> participants;
+
+    public EventSchedule(int schedId, Timestamp start, Timestamp end, String location, int vol, int eventId) {
+        this.schedId = schedId;
         this.start = start;
         this.end = end;
         this.location = location;
-        this.limit = limit;
-        this.schedID = schedID;
+        this.vol = vol;
+        this.eventId = eventId;
     }
 
-    public int getSchedID() {
-        return schedID;
+    public EventSchedule(int schedId, Timestamp start, Timestamp end, String location, int vol, int eventId,
+                         ArrayList<Role> roles, ArrayList<String> participants) {
+        this.schedId = schedId;
+        this.start = start;
+        this.end = end;
+        this.location = location;
+        this.vol = vol;
+        this.eventId = eventId;
+        this.roles = roles;
+        this.participants = participants;
     }
 
-    public void setSchedID(int schedID) {
-        this.schedID = schedID;
+    public int getSchedId() {
+        return schedId;
+    }
+
+    public void setSchedId(int schedId) {
+        this.schedId = schedId;
     }
 
     public Timestamp getStart() {
@@ -49,12 +68,35 @@ public class EventSchedule {
         this.location = location;
     }
 
-    public int getLimit() {
-        return limit;
+    public int getVol() {
+        return vol;
     }
 
-    public void setLimit(int limit) {
-        this.limit = limit;
+    public void setVol(int vol) {
+        this.vol = vol;
     }
 
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
+    public ArrayList<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(ArrayList<Role> roles) {
+        this.roles = roles;
+    }
+
+    public ArrayList<String> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(ArrayList<String> participants) {
+        this.participants = participants;
+    }
 }

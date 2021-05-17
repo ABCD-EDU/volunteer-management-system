@@ -1,22 +1,30 @@
 package models;
 
 public class Role {
-    private String name, desc;
-    private boolean needsAuth;
 
-    public Role(String name) {
+    private int roleId;
+    private String name;
+    private String description;
+    private String degree_program;
+    private int year;
+    private boolean needs_verification;
+
+    public Role(int roleId, String name, String description, String degree_program,
+                int year, boolean needs_verification) {
+        this.roleId = roleId;
         this.name = name;
+        this.description = description;
+        this.degree_program = degree_program;
+        this.year = year;
+        this.needs_verification = needs_verification;
     }
 
-    public Role(String name, String desc) {
-        this.name = name;
-        this.desc = desc;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public Role(String name, String desc, boolean needsAuth) {
-        this.name = name;
-        this.desc = desc;
-        this.needsAuth = needsAuth;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     public String getName() {
@@ -27,19 +35,35 @@ public class Role {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public boolean isNeedsAuth() {
-        return needsAuth;
+    public String getDegree_program() {
+        return degree_program;
     }
 
-    public void setNeedsAuth(boolean needsAuth) {
-        this.needsAuth = needsAuth;
+    public void setDegree_program(String degree_program) {
+        this.degree_program = degree_program;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public boolean isNeeds_verification() {
+        return needs_verification;
+    }
+
+    public void setNeeds_verification(boolean needs_verification) {
+        this.needs_verification = needs_verification;
     }
 }

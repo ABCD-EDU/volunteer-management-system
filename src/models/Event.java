@@ -1,44 +1,28 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Event {
-    private int eventId;
+
+    private int event_id;
     private String name;
     private String description;
-    private List<EventSchedule> schedule;
-    private List<Role> roles;
+    private ArrayList<EventSchedule> schedules;
 
-    public Event(int eventId) {
-        this.eventId = eventId;
-        this.name = null;
-        this.description = null;
-        this.schedule = null;
-    }
-
-    public Event(int eventId, String name, String desc, List<EventSchedule> sched, List<Role> roles) {
-        this.eventId = eventId;
+    public Event(int event_id, String name, String description) {
+        this.event_id = event_id;
         this.name = name;
-        this.description = desc;
-        this.schedule = sched;
-        this.roles = roles;
+        this.description = description;
     }
 
-    public List<EventSchedule> getSchedule() {
-        return schedule;
+    public int getEvent_id() {
+        return event_id;
     }
 
-    public void setSchedule(List<EventSchedule> schedule) {
-        this.schedule = schedule;
-    }
-
-    public int getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
+    public void setEvent_id(int event_id) {
+        this.event_id = event_id;
     }
 
     public String getName() {
@@ -57,24 +41,12 @@ public class Event {
         this.description = description;
     }
 
-    public void addSchedule(EventSchedule eventSchedule) {
-        schedule.add(eventSchedule);
+    public ArrayList<EventSchedule> getSchedules() {
+        return schedules;
     }
 
-    public void removeSchedule(EventSchedule eventSchedule) {
-        schedule.remove(eventSchedule);
+    public void setSchedules(ArrayList<EventSchedule> schedules) {
+        this.schedules = schedules;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return eventId == event.eventId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(eventId);
-    }
 }
