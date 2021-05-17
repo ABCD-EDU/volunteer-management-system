@@ -1,14 +1,14 @@
 package client;
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
-import models.*;
 
-import javax.management.relation.RoleStatus;
-import java.io.IOException;
-import java.security.InvalidAlgorithmParameterException;
+import models.Concern;
+import models.Event;
+import models.Volunteer;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public class DBConnector {
 
@@ -18,7 +18,7 @@ public class DBConnector {
 
     public static void setConnection() throws Exception {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con =  DriverManager.getConnection("jdbc:mysql://localhost/" + DATABASE_NAME + "?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false"
                     ,"root", "");
             System.out.println("DATABASE CONNECTION SUCCESSFUL");
@@ -272,4 +272,61 @@ public class DBConnector {
         }
     }
 
+    public static void getFinishedEvents(int volId) {
+        try {
+            PreparedStatement getFinished = DBConnector.con.prepareStatement("" +
+                    "SELECT *\n" +
+                    "FROM event\n" +
+                    "WHERE event.event_id=ALL (\n" +
+                    "    SELECT es.event_id \n" +
+                    "    FROM event_schedule AS es \n" +
+                    "    WHERE es.sched_id IN ( \n" +
+                    "        SELECT vel.sched_id \n" +
+                    "        FROM volunteer_event_list AS vel \n" +
+                    "        WHERE vel.vol_id=? \n" +
+                    "    ) AND es.dateTime_end < NOW()\n" +
+                    ")"
+            );
+
+            getFinished.setInt(1, volId);
+
+            ResultSet finishedEvents = getFinished.executeQuery();
+
+            Map<String, String> eventMap = new HashMap<>();
+            while (finishedEvents.next()) {
+                eventMap.put("event_id", String.valueOf(finishedEvents.getInt(1)));
+                eventMap.put("name",finishedEvents.getString(2));
+                eventMap.put("description",finishedEvents.getString(3));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static List<String> getVolunteers(int volId) {
+        List<String> volList = new ArrayList<>();
+        try {
+            PreparedStatement getVol = DBConnector.con.prepareStatement(
+                    "SELECT info.first_name, info.last_name\n" +
+                            "FROM volunteer_info as info\n" +
+                            "LEFT JOIN (\n" +
+                            "    SELECT vel.vol_id\n" +
+                            "    FROM volunteer_event_list AS vel\n" +
+                            "    WHERE vel.sched_id=?    \n" +
+                            ") as invel ON info.vol_id=invel.vol_id;"
+            );
+
+            getVol.setInt(1, volId);
+
+            ResultSet vols = getVol.executeQuery();
+
+            while (vols.next()) {
+                volList.add(vols.getString("first_name") + " " + vols.getString("last_name"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return volList;
+    }
+    
 }
