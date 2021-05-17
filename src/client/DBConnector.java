@@ -18,7 +18,7 @@ public class DBConnector {
 
     public static void setConnection() throws Exception {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             con =  DriverManager.getConnection("jdbc:mysql://localhost/" + DATABASE_NAME + "?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false"
                     ,"root", "");
             System.out.println("DATABASE CONNECTION SUCCESSFUL");

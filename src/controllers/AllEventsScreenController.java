@@ -3,7 +3,10 @@ package controllers;
 import client.DBConnector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -11,12 +14,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class AllEventsScreenController implements Initializable {
+
+    private SubmitConcernScreenController submitConcernScreenController;
+
 
     public VBox vboxVol1;
     public VBox vboxVol2;
@@ -105,6 +114,26 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onSubmitConcern(ActionEvent event) {
+        try {
+            showSubmitConcernScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    private void showSubmitConcernScreen() throws Exception{
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("../resources/view/SubmitConcernScreen.fxml"));
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(loader.load()));
+            submitConcernScreenController = loader.getController();
+            submitConcernScreenController.setCurrentlyChosenEvent(eventName_label.getText());
+
+            stage.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -134,7 +163,7 @@ public class AllEventsScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadVolunteers(3);
+
     }
 
 }
