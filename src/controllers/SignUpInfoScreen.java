@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.User;
@@ -141,7 +142,7 @@ public class SignUpInfoScreen implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Successful registration");
 
-            for (Node component : ((Pane) root).getChildren()) {
+            for (Node component : ((VBox)(((Pane) root).getChildren()).get(0)).getChildren()) {
                 if (component.getId() != null) {
                     System.out.println(component.getId());
                     if (component.getId().equals("username_label"))
