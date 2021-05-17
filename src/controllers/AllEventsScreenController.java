@@ -1,5 +1,6 @@
 package controllers;
 
+import client.DBConnector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,10 +13,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AllEventsScreenController implements Initializable {
 
+    public VBox vboxVol1;
+    public VBox vboxVol2;
+    public VBox vboxVol3;
     @FXML
     private HBox windowHeader;
 
@@ -103,9 +108,33 @@ public class AllEventsScreenController implements Initializable {
 
     }
 
+    private void loadVolunteers(int schedId) {
+        List<String> volunteers = DBConnector.getVolunteers(schedId);
+        int division = Math.round(((float)volunteers.size()/3));
+        System.out.println(division + " " + volunteers.size());
+
+        for (int i = 0; i != division ; i++) {
+            Label vol = new Label(volunteers.get(i));
+            vboxVol1.getChildren().add(vol);
+        }
+
+        for (int i = division; i < division*2; i++) {
+            Label vol = new Label(volunteers.get(i));
+            vboxVol2.getChildren().add(vol);
+        }
+
+        for (int i = division*2; i != volunteers.size(); i++) {
+            Label vol = new Label(volunteers.get(i));
+            vboxVol3.getChildren().add(vol);
+        }
+
+        int volLimit = DBConnector.getVolunteerLimit(schedId);
+        volCount_label.setText(volunteers.size() + "/" + volLimit);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        loadVolunteers(3);
     }
 
 }

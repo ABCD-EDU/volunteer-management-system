@@ -370,35 +370,16 @@
                                     </HBox>
                                     <HBox prefHeight="133.0" spacing="25.0">
                                        <children>
-                                          <VBox prefHeight="200.0">
+                                          <VBox fx:id="vboxVol1" prefHeight="200.0">
                                              <children>
-                                                <Label text="Verity Krueger" textFill="#222222" />
-                                                <Label text="Gabriel Oakley" textFill="#222222" />
-                                                <Label text="Ethel Pennington" textFill="#222222" />
-                                                <Label text="Wiktoria Burt" textFill="#222222" />
-                                                <Label text="Layla Cannon" textFill="#222222" />
-                                                <Label text="Mischa Craft" textFill="#222222" />
-                                                <Label text="Lianne Armstrong" textFill="#222222" />
                                              </children>
                                           </VBox>
-                                          <VBox prefHeight="200.0">
+                                          <VBox fx:id="vboxVol2" prefHeight="200.0">
                                              <children>
-                                                <Label text="Jasmine Foley" textFill="#222222" />
-                                                <Label text="Margaux Blackburn" textFill="#222222" />
-                                                <Label text="Hakeem Betts" textFill="#222222" />
-                                                <Label text="Izabella Huber" textFill="#222222" />
-                                                <Label text="Waqas Bush" textFill="#222222" />
-                                                <Label text="Jannah Melendez" textFill="#222222" />
-                                                <Label text="Peter Durham" textFill="#222222" />
                                              </children>
                                           </VBox>
-                                          <VBox prefHeight="200.0">
+                                          <VBox fx:id="vboxVol3" prefHeight="200.0">
                                              <children>
-                                                <Label text="Patrick Welsh" textFill="#222222" />
-                                                <Label text="Manuel Munro" textFill="#222222" />
-                                                <Label text="Gruffydd Braun" textFill="#222222" />
-                                                <Label text="Alanis Clegg" textFill="#222222" />
-                                                <Label text="Darcie Avery" textFill="#222222" />
                                              </children>
                                           </VBox>
                                        </children>

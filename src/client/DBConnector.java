@@ -368,7 +368,7 @@ public class DBConnector {
         }
     }
 
-    public static List<String> getVolunteers(int volId) {
+    public static List<String> getVolunteers(int schedId) {
         List<String> volList = new ArrayList<>();
         try {
             PreparedStatement getVol = DBConnector.con.prepareStatement(
@@ -381,7 +381,7 @@ public class DBConnector {
                             ") as invel ON info.vol_id=invel.vol_id;"
             );
 
-            getVol.setInt(1, volId);
+            getVol.setInt(1, schedId);
 
             ResultSet vols = getVol.executeQuery();
 
@@ -392,6 +392,26 @@ public class DBConnector {
             throwables.printStackTrace();
         }
         return volList;
+    }
+
+    public static int getVolunteerLimit(int schedId) {
+        try {
+            PreparedStatement limitQuery = con.prepareStatement(
+                    "SELECT es.vol_limit\n" +
+                            "FROM event_schedule AS es\n" +
+                            "WHERE es.sched_id=?"
+            );
+
+            limitQuery.setInt(1, schedId);
+
+            ResultSet volLimit = limitQuery.executeQuery();
+            if (volLimit.next()) {
+                return volLimit.getInt("vol_limit");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
     }
     
 }

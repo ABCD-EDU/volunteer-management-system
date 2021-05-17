@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="393.0" prefHeight="720.0">
          <children>
@@ -46,9 +46,6 @@
                      </children>
                   </StackPane>
                </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
                <padding>
                   <Insets top="10.0" />
                </padding>
@@ -61,7 +58,7 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </Label>
-            <HBox alignment="CENTER" prefHeight="295.0" prefWidth="495.0" spacing="25.0">
+            <HBox alignment="CENTER" prefHeight="207.0" prefWidth="546.0" spacing="25.0">
                <children>
                   <VBox prefWidth="233.0">
                      <children>
@@ -112,22 +109,13 @@
                               <Insets bottom="2.0" />
                            </VBox.margin>
                         </Label>
-                        <DatePicker fx:id="date_picker" prefHeight="30.0" prefWidth="257.0" style="-fx-background-color: #FEF9EF; -fx-background: #FEF9EF; -fx-border-color: #FFCB77; -fx-border-width: 2;">
+                        <DatePicker fx:id="date_picker" editable="false" prefHeight="30.0" prefWidth="257.0" style="-fx-background-color: #FEF9EF; -fx-background: #FEF9EF; -fx-border-color: #FFCB77; -fx-border-width: 2;">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></DatePicker>
-                        <Label text="Email" textFill="#227c9d">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="2.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField fx:id="email_field" prefHeight="30.0" prefWidth="257.0" style="-fx-background-color: #FEF9EF; -fx-border-color: #FFCB77; -fx-border-width: 2; -fx-border-radius: 3;" />
                      </children>
                   </VBox>
                   <VBox prefWidth="233.0">
@@ -189,22 +177,30 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ComboBox>
-                        <Label text="Address" textFill="#227c9d">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="2.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField fx:id="address_field" prefHeight="30.0" prefWidth="257.0" style="-fx-background-color: #FEF9EF; -fx-border-color: #FFCB77; -fx-border-width: 2; -fx-border-radius: 3;" />
                      </children>
                   </VBox>
                </children>
                <VBox.margin>
-                  <Insets bottom="25.0" />
+                  <Insets />
                </VBox.margin>
             </HBox>
+            <VBox alignment="CENTER" prefHeight="80.0" prefWidth="7.0">
+               <children>
+                  <Label alignment="CENTER" text="Address" textFill="#227c9d">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="2.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="address_field" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="492.0" style="-fx-background-color: #FEF9EF; -fx-border-color: #FFCB77; -fx-border-width: 2; -fx-border-radius: 3;">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+            </VBox>
             <Button fx:id="create_button" mnemonicParsing="false" onAction="#onCreateAccount" prefHeight="26.0" prefWidth="233.0" style="-fx-background-color: #0BB180;" text="CREATE ACCOUNT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="11.0" />
@@ -223,5 +219,10 @@
             </Label>
          </children>
       </VBox>
+      <Label fx:id="goBackButton" layoutX="48.0" layoutY="30.0" onMouseClicked="#onGoBack" text="&lt;" textFill="#ffcb77">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
