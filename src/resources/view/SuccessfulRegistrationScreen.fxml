@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="300.0" style="-fx-background-color: #FEF9EF; -fx-border-color: #227C9D; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="300.0" style="-fx-background-color: #227C9D;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="180.0" prefWidth="300.0">
          <children>
-            <Label text="Sucessful Registration!" textFill="#0bb180">
+            <Label text="Sucessful Registration!" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -20,8 +20,8 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
-            <Label contentDisplay="CENTER" text="username:" textAlignment="CENTER" />
-            <Label fx:id="username_label" alignment="CENTER" contentDisplay="CENTER" text="USERNAME" textFill="#227c9d">
+            <Label contentDisplay="CENTER" text="username:" textAlignment="CENTER" textFill="WHITE" />
+            <Label fx:id="username_label" alignment="CENTER" contentDisplay="CENTER" text="USERNAME" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -29,7 +29,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
-            <Button fx:id="okay_button" mnemonicParsing="false" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: #0BB180;" text="Continue" textFill="WHITE">
+            <Button fx:id="okay_button" mnemonicParsing="false" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: #FFCB77;" text="Continue" textFill="#444444">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
