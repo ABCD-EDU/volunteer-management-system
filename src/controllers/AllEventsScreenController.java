@@ -123,6 +123,7 @@ public class AllEventsScreenController implements Initializable {
     void onFinishedToggle(MouseEvent event) {
         events_vbox.getChildren().clear();
         initializeEventsPanel(Objects.requireNonNull(DBConnector.getFinishedEvents(vol.getVolId())));
+        join_button.setDisable(true);
     }
 
     @FXML
@@ -139,6 +140,7 @@ public class AllEventsScreenController implements Initializable {
     @FXML
     void onOngoingToggle(MouseEvent event) {
         initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
+        join_button.setDisable(false);
     }
 
     @FXML

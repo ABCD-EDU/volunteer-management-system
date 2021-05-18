@@ -381,14 +381,18 @@ public class DBConnector {
             PreparedStatement getFinished = DBConnector.con.prepareStatement("" +
                     "SELECT *\n" +
                     "FROM event\n" +
-                    "WHERE event.event_id=ALL (\n" +
-                    "    SELECT es.event_id \n" +
-                    "    FROM event_schedule AS es \n" +
-                    "    WHERE es.sched_id IN ( \n" +
-                    "        SELECT vel.sched_id \n" +
-                    "        FROM volunteer_event_list AS vel \n" +
-                    "        WHERE vel.vol_id=? \n" +
-                    "    ) AND es.dateTime_end < NOW()\n" +
+                    "WHERE event.event_id IN (\n" +
+                    "    SELECT out_es.event_id\n" +
+                    "    FROM event_schedule as out_es\n" +
+                    "    WHERE out_es.dateTime_end < ALL (\n" +
+                    "        SELECT es.dateTime_end\n" +
+                    "        FROM event_schedule AS es\n" +
+                    "        WHERE es.sched_id IN (\n" +
+                    "            SELECT vel.sched_id\n" +
+                    "            FROM volunteer_event_list AS vel\n" +
+                    "            WHERE vel.vol_id=?\n" +
+                    "        )\n" +
+                    "    )\n" +
                     ")"
             );
             getFinished.setInt(1, volId);
@@ -409,13 +413,14 @@ public class DBConnector {
         ArrayList<String> volList = new ArrayList<>();
         try {
             PreparedStatement getVol = DBConnector.con.prepareStatement(
-                    "SELECT info.first_name, info.last_name\n" +
-                            "FROM volunteer_info as info\n" +
-                            "LEFT JOIN (\n" +
-                            "    SELECT vel.vol_id\n" +
-                            "    FROM volunteer_event_list AS vel\n" +
-                            "    WHERE vel.sched_id=?    \n" +
-                            ") as invel ON info.vol_id=invel.vol_id;"
+                    "SELECT\n" +
+                            "    first_name,\n" +
+                            "    last_name\n" +
+                            "FROM\n" +
+                            "    volunteer_info\n" +
+                            "INNER JOIN volunteer_event_list USING(vol_id)\n" +
+                            "WHERE\n" +
+                            "    sched_id = ? AND is_verified = 1;"
             );
 
             getVol.setInt(1, schedId);
