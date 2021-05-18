@@ -5,18 +5,18 @@ public class Role {
     private int roleId;
     private String name;
     private String description;
-    private String degree_program;
+    private String degreeProgram;
     private int year;
-    private boolean needs_verification;
+    private boolean needsVerification;
 
     public Role(int roleId, String name, String description, String degree_program,
                 int year, boolean needs_verification) {
         this.roleId = roleId;
         this.name = name;
         this.description = description;
-        this.degree_program = degree_program;
+        this.degreeProgram = degree_program;
         this.year = year;
-        this.needs_verification = needs_verification;
+        this.needsVerification = needs_verification;
     }
 
     public int getRoleId() {
@@ -43,12 +43,12 @@ public class Role {
         this.description = description;
     }
 
-    public String getDegree_program() {
-        return degree_program;
+    public String getDegreeProgram() {
+        return degreeProgram;
     }
 
-    public void setDegree_program(String degree_program) {
-        this.degree_program = degree_program;
+    public void setDegreeProgram(String degreeProgram) {
+        this.degreeProgram = degreeProgram;
     }
 
     public int getYear() {
@@ -59,12 +59,12 @@ public class Role {
         this.year = year;
     }
 
-    public boolean isNeeds_verification() {
-        return needs_verification;
+    public boolean isNeedsVerification() {
+        return needsVerification;
     }
 
-    public void setNeeds_verification(boolean needs_verification) {
-        this.needs_verification = needs_verification;
+    public void setNeedsVerification(boolean needsVerification) {
+        this.needsVerification = needsVerification;
     }
 
     @Override

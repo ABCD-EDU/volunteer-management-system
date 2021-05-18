@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
 import models.Concern;
+import models.Event;
+import models.EventSchedule;
+import models.Volunteer;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -22,6 +25,8 @@ import java.util.stream.Collectors;
 
 public class SubmitConcernScreenController implements Initializable{
 
+    private Volunteer vol;
+    private EventSchedule es;
 
     @FXML
     Button cancel_button;
@@ -39,6 +44,14 @@ public class SubmitConcernScreenController implements Initializable{
     HBox bottom_hbox;
 
     String currentlyChosenEvent;
+
+    public void setVol(Volunteer vol) {
+        this.vol = vol;
+    }
+
+    public void setEs(EventSchedule es) {
+        this.es = es;
+    }
 
     public void setCurrentlyChosenEvent(String eventName){
         currentlyChosenEvent = eventName;
@@ -70,12 +83,11 @@ public class SubmitConcernScreenController implements Initializable{
                 }
             }
             //Call insertconcern method
-            DBConnector.insertConcern(new Concern(concernType, description, 1, 1)); //userId and event Id are temporary. Need a way to have access to them.
+            DBConnector.insertConcern(new Concern(concernType, description, vol.getUserId(), es.getSchedId())); //userId and event Id are temporary. Need a way to have access to them.
             Stage stage = (Stage) cancel_button.getScene().getWindow();
             stage.close();
         }
     }
-
     
     public void initializeComboBox(){
 
@@ -92,8 +104,6 @@ public class SubmitConcernScreenController implements Initializable{
         }
 
     }
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

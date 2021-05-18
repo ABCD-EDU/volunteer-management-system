@@ -350,7 +350,6 @@ public class DBConnector {
      * Inserts a new concern to the volunter_concerns table given a concern to be inserted.
      */
     public static boolean insertConcern(Concern concern){
-
         String query = "INSERT INTO volunteer_concerns (type, description, vol_id, sched_id)" +
                 "VALUES (?, ?, ?, ?)";
         try{
@@ -363,6 +362,48 @@ public class DBConnector {
 
             statement.executeUpdate();
             return true;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static void joinVolunteerToSchedule(int volId, int schedId, int roleId, int isVerified) {
+        try{
+            PreparedStatement statement = DBConnector.con.prepareStatement(
+                    "INSERT INTO volunteer_event_list(\n" +
+                            "    vol_id,\n" +
+                            "    sched_id,\n" +
+                            "    role_id,\n" +
+                            "    is_verified\n" +
+                            ")\n" +
+                            "VALUES(?, ?, ?, ?)"
+            );
+            statement.setInt(1,volId);
+            statement.setInt(2,schedId);
+            statement.setInt(3,roleId);
+            statement.setInt(4, isVerified);
+            statement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean isVolParticipating(int voldId, int schedId) {
+        String query = "SELECT\n" +
+                "    *\n" +
+                "FROM\n" +
+                "    volunteer_event_list\n" +
+                "WHERE\n" +
+                "    vol_id = ? AND sched_id = ?";
+        try{
+            PreparedStatement statement = DBConnector.con.prepareStatement(query);
+
+            statement.setInt(1,voldId);
+            statement.setInt(2,schedId);
+            ResultSet rs = statement.executeQuery();
+
+            return rs.next();
         }catch (SQLException e){
             e.printStackTrace();
             return false;
@@ -408,20 +449,18 @@ public class DBConnector {
             ArrayList<Event> events = new ArrayList<>();
             PreparedStatement getFinished = DBConnector.con.prepareStatement("" +
                     "SELECT *\n" +
-                    "FROM event\n" +
-                    "WHERE event.event_id IN (\n" +
-                    "    SELECT out_es.event_id\n" +
-                    "    FROM event_schedule as out_es\n" +
-                    "    WHERE out_es.dateTime_end < ALL (\n" +
-                    "        SELECT es.dateTime_end\n" +
+                    "    FROM event\n" +
+                    "    INNER JOIN (\n" +
+                    "        SELECT es.event_id, MAX(es.dateTime_end) AS 'end'\n" +
                     "        FROM event_schedule AS es\n" +
-                    "        WHERE es.sched_id IN (\n" +
+                    "        INNER JOIN (\n" +
                     "            SELECT vel.sched_id\n" +
                     "            FROM volunteer_event_list AS vel\n" +
                     "            WHERE vel.vol_id=?\n" +
-                    "        )\n" +
-                    "    )\n" +
-                    ")"
+                    "        )as in_sched USING (sched_id)\n" +
+                    "        GROUP BY es.event_id    \n" +
+                    "    ) as es_grp USING (event_id)\n" +
+                    "    WHERE es_grp.end < NOW()"
             );
             getFinished.setInt(1, volId);
 

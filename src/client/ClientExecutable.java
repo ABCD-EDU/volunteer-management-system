@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Concern;
 
+import java.sql.Timestamp;
+
 public class ClientExecutable extends Application {
 
     @Override

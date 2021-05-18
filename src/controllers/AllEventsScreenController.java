@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -35,6 +32,7 @@ public class AllEventsScreenController implements Initializable {
     private Role selectedRole;
     private Volunteer vol;
     private SubmitConcernScreenController submitConcernScreenController;
+    private Event selectedEvent;
 
     public VBox vboxVol1;
     public VBox vboxVol2;
@@ -46,7 +44,7 @@ public class AllEventsScreenController implements Initializable {
     private TextField eventSearchField;
 
     @FXML
-    private Button eventsTypeButton;
+    private Button eventsType_button;
 
     @FXML
     private Label name_label;
@@ -121,6 +119,11 @@ public class AllEventsScreenController implements Initializable {
     }
 
     @FXML
+    void onEventsTypeToggle(ActionEvent event) {
+
+    }
+
+    @FXML
     void onFinishedToggle(MouseEvent event) {
         events_vbox.getChildren().clear();
         initializeEventsPanel(Objects.requireNonNull(DBConnector.getFinishedEvents(vol.getVolId())));
@@ -129,7 +132,26 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onJoinEvent(ActionEvent event) {
+        // check if user is already part of event
+        if (DBConnector.isVolParticipating(vol.getVolId(), selectedSched.getSchedId())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("You are already participating in this event's schedule");
+            alert.showAndWait();
+            return;
+        }
 
+        if (!checkAvailability(vol.getVolId(), selectedSched.getStart(), selectedSched.getEnd())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("You already joined a schedule that overlaps this schedule");
+            alert.showAndWait();
+            return;
+        }
+
+        int isVerified = 1;
+        if (selectedRole.isNeedsVerification())
+            isVerified = 0;
+        DBConnector.joinVolunteerToSchedule(vol.getVolId(), selectedSched.getSchedId(),
+                selectedRole.getRoleId(), isVerified);
     }
 
     @FXML
@@ -151,8 +173,8 @@ public class AllEventsScreenController implements Initializable {
             System.out.println(selectedRole);
             rolesDesc_label.setText(selectedRole.getDescription());
             String program = "None";
-            if (!selectedRole.getDegree_program().equals(""))
-                program = selectedRole.getDegree_program();
+            if (!selectedRole.getDegreeProgram().equals(""))
+                program = selectedRole.getDegreeProgram();
             programReq_label.setText("Degree Program: " + program);
             if (selectedRole.getYear() != 0)
                 yearReq_label.setText("Year: " + selectedRole.getYear());
@@ -197,6 +219,8 @@ public class AllEventsScreenController implements Initializable {
             stage.setScene(new Scene(loader.load()));
             submitConcernScreenController = loader.getController();
             submitConcernScreenController.setCurrentlyChosenEvent(eventName_label.getText());
+            submitConcernScreenController.setVol(vol);
+            submitConcernScreenController.setEs(selectedSched);
 
             stage.show();
         }catch (Exception e){
@@ -247,6 +271,7 @@ public class AllEventsScreenController implements Initializable {
                     e.setSchedules(DBConnector.getEventSchedules(e.getEvent_id()));
                     System.out.println(e.getSchedules());
                     setRightCardProperties(e);
+                    selectedEvent = e;
                 });
 
                 // set card properties

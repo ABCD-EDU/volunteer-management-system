@@ -28,7 +28,7 @@
                         <Insets top="16.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="eventsTypeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #FFCB77;" text="All Events" textFill="#444444">
+                  <Button fx:id="eventsType_button" mnemonicParsing="false" onAction="#onEventsTypeToggle" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #FFCB77;" text="All Events" textFill="#444444">
                      <HBox.margin>
                         <Insets left="13.0" top="16.0" />
                      </HBox.margin>
