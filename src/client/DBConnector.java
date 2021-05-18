@@ -2,6 +2,7 @@ package client;
 
 import models.Concern;
 import models.Event;
+import models.User;
 import models.Volunteer;
 
 import java.sql.*;
@@ -104,6 +105,46 @@ public class DBConnector {
         }
         return events;
     }
+
+    public static Volunteer getVolunteer(String username) {
+        Volunteer volunteer = null;
+        try {
+            PreparedStatement statement = DBConnector.con.prepareStatement(
+                    "SELECT\n" +
+                            "    *\n" +
+                            "FROM\n" +
+                            "    user_acc\n" +
+                            "INNER JOIN volunteer_info USING(user_id)\n" +
+                            "WHERE\n" +
+                            "    user_acc.username = ?"
+            );
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+
+            User.Type uType = User.Type.ADMIN;
+            if(rs.getString(4).equals("volunteer"))
+                uType = User.Type.VOLUNTEER;
+
+            Volunteer.Type vType = Volunteer.Type.FACULTY;
+            if (rs.getString(11).equals("student"))
+                vType = Volunteer.Type.STUDENT;
+
+            Volunteer.Sex sex = Volunteer.Sex.FEMALE;
+            if (rs.getString(14).equals("male"))
+                sex = Volunteer.Sex.MALE;
+
+            volunteer = new Volunteer(
+                     rs.getString(2), rs.getString(3), uType, rs.getInt(5),
+                    rs.getString(6), rs.getString(7), rs.getDate(8),
+                    rs.getString(9), rs.getLong(10), vType, rs.getInt(12),
+                    rs.getString(13), sex, rs.getInt(1));
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return volunteer;
+    }
+
 
 //    public static ArrayList<Event> getFinishedJoinedEvents(int volId) {
 //        ArrayList<Event> events = new ArrayList<>();
@@ -363,6 +404,7 @@ public class DBConnector {
                 eventMap.put("name",finishedEvents.getString(2));
                 eventMap.put("description",finishedEvents.getString(3));
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

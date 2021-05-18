@@ -199,4 +199,22 @@ public class Volunteer extends User{
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "Volunteer{" +
+                "volId=" + volId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
+                ", address='" + address + '\'' +
+                ", phone_number=" + phone_number +
+                ", type=" + type +
+                ", year=" + year +
+                ", degreeProgram='" + degreeProgram + '\'' +
+                ", sex=" + sex +
+                ", userId=" + userId +
+                '}';
+    }
+
 }

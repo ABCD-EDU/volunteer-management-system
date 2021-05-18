@@ -4,6 +4,7 @@ import client.DBConnector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -75,9 +76,16 @@ public class SignInScreenController {
 
     private void initializeLogin(String username) {
         try {
-            Stage window = (Stage)signup_button.getScene().getWindow();
-            window.setScene(new Scene(FXMLLoader.load(getClass()
-                    .getResource("../resources/view/AllEvents.fxml"))));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/view/AllEvents.fxml"));
+            AllEventsScreenController controller = new AllEventsScreenController();
+
+            controller.setVol(DBConnector.getVolunteer(username));
+
+            loader.setController(controller);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage window = (Stage)login_button.getScene().getWindow();
+            window.setScene(scene);
             window.show();
         }catch (IOException e) {
             e.printStackTrace();

@@ -5,17 +5,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane fx:id="eventCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="233.0" style="-fx-background-color: #FFCB77; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="233.0" style="-fx-background-color: #FFCB77; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" layoutX="20.0" layoutY="17.0" prefHeight="87.0" prefWidth="194.0">
          <children>
-            <Label fx:id="eventName1" alignment="CENTER" prefWidth="194.0" text="Event Name" textAlignment="CENTER" textFill="#444444" wrapText="true">
+            <Label fx:id="name_label" alignment="CENTER" prefWidth="194.0" text="Event Name" textAlignment="CENTER" textFill="#444444" wrapText="true">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="eventDate1" text="Earliest Date" />
+            <Label fx:id="date_label" text="Earliest Date" />
          </children>
       </VBox>
    </children>

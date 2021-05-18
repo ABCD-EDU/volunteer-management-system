@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AllEventsScreenController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="56.0" prefWidth="1280.0" style="-fx-background-color: #227C9D;">
          <children>
@@ -112,7 +112,7 @@
                         </HBox>
                         <ScrollPane prefHeight="618.0" prefWidth="261.0" style="-fx-background-color: #FEF9EF; -fx-background: #FEF9EF;">
                            <content>
-                              <VBox alignment="TOP_CENTER" prefHeight="616.0" prefWidth="233.0" spacing="20.0">
+                              <VBox fx:id="events_vbox" alignment="TOP_CENTER" prefHeight="616.0" prefWidth="233.0" spacing="20.0">
                                  <children>
                                     <Pane prefHeight="120.0" prefWidth="233.0" style="-fx-border-color: #FFCB77; -fx-border-width: 3; -fx-border-radius: 10;">
                                        <VBox.margin>
@@ -219,7 +219,7 @@
                                                 <HBox alignment="CENTER" prefWidth="200.0">
                                                    <children>
                                                       <Label text="hosted by: " textFill="WHITE" />
-                                                      <Label text="Organization Name" textFill="WHITE">
+                                                      <Label text="ABCD" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="11.0" />
                                                          </font>
