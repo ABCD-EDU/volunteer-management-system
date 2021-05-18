@@ -26,6 +26,7 @@ import models.Volunteer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.*;
 
 public class AllEventsScreenController implements Initializable {
@@ -284,10 +285,38 @@ public class AllEventsScreenController implements Initializable {
         userRole_label.setText(label);
     }
 
+    protected boolean checkAvailability(int volId, Timestamp start, Timestamp end) {
+        Map<Timestamp, Timestamp> volScheds = DBConnector.getVolunteerSchedules(volId);
+
+        boolean isAvailable = true;
+        for (Map.Entry<Timestamp, Timestamp> entry : volScheds.entrySet()) {
+            Timestamp eventStart = entry.getKey();
+            Timestamp eventEnd = entry.getValue();
+
+            if (eventStart.compareTo(start) > 0 && start.compareTo(eventEnd) < 0) {
+                isAvailable = false;
+            } else if (eventStart.compareTo(end) > 0 && end.compareTo(eventEnd) < 0) {
+                isAvailable = false;
+            }
+        }
+
+        return isAvailable;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
         name_label.setText(vol.getFirstName() + " " + vol.getLastName());
+
+        //Date object
+        Date date= new Date();
+        //getTime() returns current time in milliseconds
+        long time = date.getTime();
+        //Passed the milliseconds to constructor of Timestamp class
+        Timestamp ts = new Timestamp(time);
+
+        boolean r = checkAvailability(1, ts, ts);
+        System.out.println(r);
     }
 
 }
