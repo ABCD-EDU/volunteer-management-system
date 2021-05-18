@@ -2,12 +2,12 @@ package controllers;
 
 import client.DBConnector;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -20,17 +20,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Event;
+import models.EventSchedule;
+import models.Role;
 import models.Volunteer;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class AllEventsScreenController implements Initializable {
 
+    private EventSchedule selectedSched;
+    private Role selectedRole;
     private Volunteer vol;
     private SubmitConcernScreenController submitConcernScreenController;
 
@@ -77,16 +78,13 @@ public class AllEventsScreenController implements Initializable {
     private Label eventDesc_label;
 
     @FXML
-    private ComboBox<?> location_comboBox;
+    private ComboBox<EventSchedule> sched_comboBox;
 
     @FXML
-    private ComboBox<?> date_comboBox;
+    private ComboBox<Role> roles_comboBox;
 
     @FXML
-    private ComboBox<?> roles_comboBox;
-
-    @FXML
-    private Label role_description;
+    private Label rolesDesc_label;
 
     @FXML
     private Button join_button;
@@ -96,6 +94,21 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     private Label volCount_label;
+
+    @FXML
+    private Label programReq_label;
+
+    @FXML
+    private Label yearReq_label;
+
+    @FXML
+    private Label location_label;
+
+    @FXML
+    private Label startDateTime_label;
+
+    @FXML
+    private Label endDateTime_label;
 
     public void setVol(Volunteer vol) {
         this.vol = vol;
@@ -108,7 +121,8 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onFinishedToggle(MouseEvent event) {
-
+        events_vbox.getChildren().clear();
+        initializeEventsPanel(Objects.requireNonNull(DBConnector.getFinishedEvents(vol.getVolId())));
     }
 
     @FXML
@@ -124,7 +138,43 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onOngoingToggle(MouseEvent event) {
+        initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
+    }
 
+    @FXML
+    void onRolesChange(ActionEvent event) {
+        try {
+            selectedRole = roles_comboBox.getSelectionModel().getSelectedItem();
+            System.out.println(selectedRole);
+            rolesDesc_label.setText(selectedRole.getDescription());
+            String program = "None";
+            if (!selectedRole.getDegree_program().equals(""))
+                program = selectedRole.getDegree_program();
+            programReq_label.setText("Degree Program: " + program);
+            if (selectedRole.getYear() != 0)
+                yearReq_label.setText("Year: " + selectedRole.getYear());
+            else
+                yearReq_label.setText("Year: " + "None");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void onScheduleChange(ActionEvent event) {
+        try {
+            selectedSched = sched_comboBox.getSelectionModel().getSelectedItem();
+            roles_comboBox.setItems(FXCollections.observableList(selectedSched.getRoles()));
+            roles_comboBox.getSelectionModel().selectFirst();
+
+            location_label.setText(selectedSched.getLocation());
+            startDateTime_label.setText(selectedSched.getStart().toString());
+            endDateTime_label.setText(selectedSched.getEnd().toString());
+
+            loadVolunteers(selectedSched.getParticipants(), selectedSched.getSchedId());
+        }catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -152,10 +202,14 @@ public class AllEventsScreenController implements Initializable {
 
     }
 
-    private void loadVolunteers(int schedId) {
-        List<String> volunteers = DBConnector.getVolunteers(schedId);
+    private void loadVolunteers(ArrayList<String> volunteers, int schedId) {
+//        ArrayList<String> volunteers = DBConnector.getVolunteers(schedId);
         int division = Math.round(((float)volunteers.size()/3));
         System.out.println(division + " " + volunteers.size());
+
+        vboxVol1.getChildren().clear();
+        vboxVol2.getChildren().clear();
+        vboxVol3.getChildren().clear();
 
         for (int i = 0; i != division ; i++) {
             Label vol = new Label(volunteers.get(i));
@@ -176,9 +230,7 @@ public class AllEventsScreenController implements Initializable {
         volCount_label.setText(volunteers.size() + "/" + volLimit);
     }
 
-    private void initializeOngoingAllEventsScene() {
-        System.out.println(DBConnector.getAllOngoingEvents(vol.getVolId()));
-        ArrayList<Event> events = DBConnector.getAllOngoingEvents(vol.getVolId());
+    private void initializeEventsPanel(ArrayList<Event> events) {
         assert events != null;
         try {
             Platform.runLater(() -> events_vbox.getChildren().clear());
@@ -189,8 +241,9 @@ public class AllEventsScreenController implements Initializable {
 
                 // set onMouseClick
                 node.setOnMouseClicked((event) -> {
-                    eventName_label.setText(e.getName());
-                    eventDesc_label.setText(e.getDescription());
+                    e.setSchedules(DBConnector.getEventSchedules(e.getEvent_id()));
+                    System.out.println(e.getSchedules());
+                    setRightCardProperties(e);
                 });
 
                 // set card properties
@@ -208,9 +261,32 @@ public class AllEventsScreenController implements Initializable {
         }
     }
 
+    private void setRightCardProperties(Event e) {
+        eventName_label.setText(e.getName());
+        eventDesc_label.setText(e.getDescription());
+        sched_comboBox.setItems(FXCollections.observableList(e.getSchedules()));
+        sched_comboBox.getSelectionModel().selectFirst();
+        selectedSched = sched_comboBox.getSelectionModel().getSelectedItem();
+        roles_comboBox.setItems(FXCollections.observableList(
+                sched_comboBox.getSelectionModel().getSelectedItem().getRoles()));
+        roles_comboBox.getSelectionModel().selectFirst();
+        selectedRole = roles_comboBox.getSelectionModel().getSelectedItem();
+
+        List<Map<String, String>> list = DBConnector.getVolunteerSchedRole(vol.getVolId(), e.getEvent_id());
+        String label = "You are not participating in any schedule";
+        if (list.size() == 0)
+            userRole_label.setText(label);
+        else
+            label = "";
+        for (Map<String, String> m : list) {
+            label += "schedule " + m.get("schedId") + " - " + m.get("role") + "\n";
+        }
+        userRole_label.setText(label);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeOngoingAllEventsScene();
+        initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
         name_label.setText(vol.getFirstName() + " " + vol.getLastName());
     }
 

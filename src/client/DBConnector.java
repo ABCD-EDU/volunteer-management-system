@@ -1,10 +1,6 @@
 package client;
 
-import models.Concern;
-import models.Event;
-import models.EventSchedule;
-import models.User;
-import models.Volunteer;
+import models.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -379,8 +375,9 @@ public class DBConnector {
         }
     }
 
-    public static void getFinishedEvents(int volId) {
+    public static ArrayList<Event> getFinishedEvents(int volId) {
         try {
+            ArrayList<Event> events = new ArrayList<>();
             PreparedStatement getFinished = DBConnector.con.prepareStatement("" +
                     "SELECT *\n" +
                     "FROM event\n" +
@@ -394,25 +391,22 @@ public class DBConnector {
                     "    ) AND es.dateTime_end < NOW()\n" +
                     ")"
             );
-
             getFinished.setInt(1, volId);
 
-            ResultSet finishedEvents = getFinished.executeQuery();
-
-            Map<String, String> eventMap = new HashMap<>();
-            while (finishedEvents.next()) {
-                eventMap.put("event_id", String.valueOf(finishedEvents.getInt(1)));
-                eventMap.put("name",finishedEvents.getString(2));
-                eventMap.put("description",finishedEvents.getString(3));
+            ResultSet rs = getFinished.executeQuery();
+            while (rs.next()) {
+                Event e = new Event(rs.getInt(1), rs.getString(2), rs.getString(3));
+                events.add(e);
             }
-
+            return events;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return null;
     }
 
-    public static List<String> getVolunteers(int schedId) {
-        List<String> volList = new ArrayList<>();
+    public static ArrayList<String> getVolunteers(int schedId) {
+        ArrayList<String> volList = new ArrayList<>();
         try {
             PreparedStatement getVol = DBConnector.con.prepareStatement(
                     "SELECT info.first_name, info.last_name\n" +
@@ -457,22 +451,102 @@ public class DBConnector {
         return -1;
     }
 
-//    public static ArrayList<EventSchedule> getEventSchedules(int event_id){
-//        List<EventSchedule> schedChoices = new ArrayList<>();
-//        try{
-//            PreparedStatement schedulesFromAnEventQuery = con.prepareStatement(
-//                    "SELECT * FROM event_shedule AS es WHERE es.event_id=?");
-//
-//            schedulesFromAnEventQuery.setInt(1, event_id);
-//
-//            ResultSet schedules = schedulesFromAnEventQuery.executeQuery();
-//            while (schedules.next()){
-//
-//            }
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//        }
-//    }
+    public static ArrayList<EventSchedule> getEventSchedules(int event_id){
+        ArrayList<EventSchedule> schedChoices = new ArrayList<>();
+        try{
+            PreparedStatement schedulesFromAnEventQuery = con.prepareStatement(
+                    "SELECT * from event_schedule where event_id = ?");
+
+            schedulesFromAnEventQuery.setInt(1, event_id);
+
+            ResultSet rs = schedulesFromAnEventQuery.executeQuery();
+            while (rs.next()){
+                int schedId = rs.getInt("sched_id");
+                EventSchedule es = new EventSchedule(schedId, rs.getTimestamp(2),
+                        rs.getTimestamp(3), rs.getString(4), rs.getInt(5),
+                        rs.getInt(6));
+                es.setParticipants(getVolunteers(schedId));
+                es.setRoles(getRoles(schedId));
+                schedChoices.add(es);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return schedChoices;
+    }
+
+    public static ArrayList<Role> getRoles(int sched_id){
+        ArrayList<Role> roles = new ArrayList<>();
+        try{
+            PreparedStatement statement = con.prepareStatement(
+                    "SELECT\n" +
+                            "    *\n" +
+                            "FROM\n" +
+                            "    role\n" +
+                            "INNER JOIN role_event_list USING(role_id)\n" +
+                            "WHERE\n" +
+                            "    role_event_list.sched_id = ?");
+
+            statement.setInt(1, sched_id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                Role es = new Role(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getInt(5), rs.getBoolean(6));
+                roles.add(es);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return roles;
+    }
+
+    public static List<Map<String, String>> getVolunteerSchedRole(int volId, int eventId) {
+        try {
+            List<Map<String, String>> list = new ArrayList<>();
+            PreparedStatement statement = con.prepareStatement(
+                    "SELECT\n" +
+                            "    sched_id,\n" +
+                            "    role_id\n" +
+                            "FROM\n" +
+                            "    volunteer_event_list\n" +
+                            "WHERE\n" +
+                            "    vol_id = ? AND sched_id IN(\n" +
+                            "    SELECT\n" +
+                            "        sched_id\n" +
+                            "    FROM\n" +
+                            "        event_schedule\n" +
+                            "    WHERE\n" +
+                            "        event_id = ?\n" +
+                            ")");
+            statement.setInt(1, volId);
+            statement.setInt(2, eventId);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Map<String, String> map = new HashMap<>();
+                map.put("schedId", String.valueOf(rs.getInt("sched_id")));
+                map.put("role", getEventName(rs.getInt("role_id")));
+                list.add(map);
+            }
+            return list;
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getEventName(int roleId) {
+        try{
+            PreparedStatement statement = con.prepareStatement(
+                    "SELECT name FROM role WHERE role_id = ?");
+            statement.setInt(1, roleId);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            return rs.getString(1);
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public static boolean joinEvent(int vol_id, EventSchedule chosenSchedule){
         return true;

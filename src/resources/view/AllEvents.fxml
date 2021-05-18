@@ -175,7 +175,7 @@
                      <children>
                         <HBox>
                            <children>
-                              <Label text="My Role: " textFill="#227c9d">
+                              <Label text="My Role(s): " textFill="#227c9d">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -183,7 +183,7 @@
                                     <Insets left="6.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label fx:id="userRole_label" text="Role or Message here" textFill="#fe6d73">
+                              <Label fx:id="userRole_label" text="Schedule - role" textFill="#fe6d73">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -242,7 +242,7 @@
                                                             <Insets bottom="10.0" />
                                                          </VBox.margin>
                                                       </Label>
-                                                      <Label text="Location &amp; Date">
+                                                      <Label text="Available Schedules">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
@@ -252,23 +252,40 @@
                                                       </Label>
                                                       <HBox spacing="15.0">
                                                          <children>
-                                                            <ComboBox fx:id="location_comboBox" prefWidth="225.0" promptText="Location" style="-fx-background-color: #FFCB77; -fx-border-color: #555555; -fx-border-radius: 3;" />
-                                                            <ComboBox fx:id="date_comboBox" prefWidth="150.0" promptText="Date" style="-fx-background-color: #FFCB77; -fx-border-color: #555555; -fx-border-radius: 3;" />
+                                                            <ComboBox fx:id="sched_comboBox" onAction="#onScheduleChange" prefHeight="27.0" prefWidth="392.0" promptText="Schedule" style="-fx-background-color: #FFCB77; -fx-border-color: #555555; -fx-border-radius: 3;" />
                                                          </children>
                                                          <VBox.margin>
                                                             <Insets bottom="10.0" />
                                                          </VBox.margin>
                                                       </HBox>
-                                                      <Label text="Time">
+                                                      <Label text="Location">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
                                                       </Label>
                                                       <VBox>
                                                          <children>
-                                                            <Label text="- 8:00 am - 12:00 pm" />
-                                                            <Label text="- 12:00 pm - 4:00 pm" />
-                                                            <Label text="- 4:00 pm - 6:00 pm" />
+                                                            <Label fx:id="location_label" text="- 8:00 am - 12:00 pm" />
+                                                         </children>
+                                                      </VBox>
+                                                      <Label text="Start Date &amp; Time">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <VBox>
+                                                         <children>
+                                                            <Label fx:id="startDateTime_label" text="- 8:00 am - 12:00 pm" />
+                                                         </children>
+                                                      </VBox>
+                                                      <Label text="End Date &amp; Time">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <VBox>
+                                                         <children>
+                                                            <Label fx:id="endDateTime_label" text="- 8:00 am - 12:00 pm" />
                                                          </children>
                                                          <VBox.margin>
                                                             <Insets bottom="10.0" />
@@ -282,7 +299,7 @@
                                                             <Insets bottom="5.0" />
                                                          </VBox.margin>
                                                       </Label>
-                                                      <ComboBox fx:id="roles_comboBox" prefWidth="225.0" promptText="Roles" style="-fx-background-color: #FFCB77; -fx-border-color: #555555; -fx-border-radius: 3;">
+                                                      <ComboBox fx:id="roles_comboBox" onAction="#onRolesChange" prefWidth="225.0" promptText="Roles" style="-fx-background-color: #FFCB77; -fx-border-color: #555555; -fx-border-radius: 3;">
                                                          <VBox.margin>
                                                             <Insets bottom="10.0" />
                                                          </VBox.margin>
@@ -295,7 +312,7 @@
                                                             <Insets />
                                                          </VBox.margin>
                                                       </Label>
-                                                      <Label fx:id="role_description" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in neque cursus, pretium magna quis, laoreet diam. Proin posuere, nibh ac sollicitudin fringilla." wrapText="true">
+                                                      <Label fx:id="rolesDesc_label" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in neque cursus, pretium magna quis, laoreet diam. Proin posuere, nibh ac sollicitudin fringilla." wrapText="true">
                                                          <VBox.margin>
                                                             <Insets bottom="10.0" />
                                                          </VBox.margin>
@@ -307,13 +324,8 @@
                                                       </Label>
                                                       <VBox>
                                                          <children>
-                                                            <Label text="- Requirement 1" wrapText="true" />
-                                                            <Label text="- Requirement 2" wrapText="true" />
-                                                            <Label text="- Requirement 3" wrapText="true">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
+                                                            <Label fx:id="programReq_label" text="- Requirement 1" wrapText="true" />
+                                                            <Label fx:id="yearReq_label" text="- Requirement 2" wrapText="true" />
                                                          </children>
                                                       </VBox>
                                                    </children>

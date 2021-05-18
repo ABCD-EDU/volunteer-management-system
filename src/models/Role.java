@@ -66,4 +66,10 @@ public class Role {
     public void setNeeds_verification(boolean needs_verification) {
         this.needs_verification = needs_verification;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
 }

@@ -49,4 +49,13 @@ public class Event {
         this.schedules = schedules;
     }
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "event_id=" + event_id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", schedules=" + schedules +
+                '}';
+    }
 }

@@ -99,4 +99,10 @@ public class EventSchedule {
     public void setParticipants(ArrayList<String> participants) {
         this.participants = participants;
     }
+
+    @Override
+    public String toString() {
+        return "schedule " + this.schedId;
+    }
+
 }
