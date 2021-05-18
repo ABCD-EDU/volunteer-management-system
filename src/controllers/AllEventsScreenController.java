@@ -295,7 +295,7 @@ public class AllEventsScreenController implements Initializable {
         try {
             Platform.runLater(() -> events_vbox.getChildren().clear());
             for (Event e : events) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/view/EventCard.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/view/AllEventsCard.fxml"));
                 Node node = loader.load();
                 String date = "date";
 
