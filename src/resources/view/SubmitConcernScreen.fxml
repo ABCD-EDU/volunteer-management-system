@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -9,44 +11,67 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="333.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SubmitConcernScreenController">
+<Pane prefHeight="333.0" prefWidth="600.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SubmitConcernScreenController">
    <children>
-      <Pane fx:id="upper_pane" prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #227C9D;">
+      <Pane fx:id="upper_pane" prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #227C9D;">
          <children>
-            <Label fx:id="event_name_concern" alignment="CENTER" layoutX="182.0" layoutY="10.0" prefHeight="31.0" prefWidth="236.0" text="Event Name Concern" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Label fx:id="event_name_concern" alignment="CENTER" layoutX="212.0" layoutY="8.0" text="Event Name Concern Form" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="System Bold" size="21.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <VBox fx:id="middle_vbox" layoutX="100.0" layoutY="67.0" prefHeight="200.0" prefWidth="400.0">
+      <VBox fx:id="middle_vbox" layoutX="87.0" layoutY="48.0">
          <children>
-            <Label prefHeight="20.0" prefWidth="99.0" text="Concern">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="combo_box"  prefHeight="40.0" prefWidth="658.0" style="-fx-background-color: FFCB77; -fx-background-radius: 3; -fx-border-color: FFFFFF;" />
-            <Pane prefHeight="41.0" prefWidth="640.0" />
-            <Label prefHeight="18.0" prefWidth="99.0" text="Description">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <TextArea fx:id="description_textarea" prefHeight="234.0" prefWidth="640.0" style="-fx-background-color: FFCB77; -fx-border-radius: 3;" wrapText="true" />
-         </children>
-      </VBox>
-      <HBox fx:id="bottom_hbox" layoutY="293.0" prefHeight="40.0" prefWidth="600.0">
-         <children>
-            <Button fx:id="cancel_button" alignment="CENTER" mnemonicParsing="false" onAction="#onCancel" prefHeight="40.0" prefWidth="450.0" style="-fx-background-color: FE6D73;" text="CANCEL" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></Button>
-            <Button fx:id="submit_button" mnemonicParsing="false" onAction="#onSubmit" prefHeight="40.0" prefWidth="450.0" style="-fx-background-color: #0BB180;" text="SUBMIT" textFill="WHITE">
+            <Label style="-fx-font-weight: semi-bold;" text="Concern" textFill="#227c9d">
                <font>
                   <Font size="13.0" />
                </font>
+               <VBox.margin>
+                  <Insets left="2.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="2.0" />
+               </padding>
+            </Label>
+            <ComboBox fx:id="combo_box" prefHeight="28.0" prefWidth="426.0" style="-fx-background-color: #FFE2B3; -fx-background-radius: 3;">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
+            <Label text="Description" textFill="#227c9d">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="2.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="2.0" />
+               </padding>
+            </Label>
+            <TextArea fx:id="description_textarea" prefHeight="146.0" prefWidth="426.0" style="-fx-control-inner-background: #FFE2B3; -fx-focus-color: none; -fx-text-box-border: #FEF9EF;" wrapText="true" />
+         </children>
+      </VBox>
+      <HBox fx:id="bottom_hbox" layoutY="298.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="cancel_button" alignment="CENTER" mnemonicParsing="false" onAction="#onCancel" prefHeight="35.0" prefWidth="450.0" style="-fx-background-color: FE6D73; -fx-background-radius: 0;" text="CANCEL" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button fx:id="submit_button" alignment="CENTER" mnemonicParsing="false" onAction="#onSubmit" prefHeight="35.0" prefWidth="450.0" style="-fx-background-color: #0BB180; -fx-background-radius: 0;" text="SUBMIT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </HBox>
