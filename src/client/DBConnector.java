@@ -375,6 +375,34 @@ public class DBConnector {
         }
     }
 
+    public static Map<Timestamp, Timestamp> getVolunteerSchedules(int volId) {
+        Map<Timestamp, Timestamp> map = new HashMap<>();
+        try {
+            PreparedStatement getTime = con.prepareStatement(
+                    "SELECT vel.vol_id, vel.sched_id, dt.dateTime_start, dt.dateTime_end\n" +
+                            "FROM volunteer_event_list AS vel\n" +
+                            "INNER JOIN (\n" +
+                            "\tSELECT es.sched_id, es.dateTime_start, es.dateTime_end\n" +
+                            "\tFROM event_schedule AS es    \n" +
+                            ") AS dt ON vel.sched_id=dt.sched_id\n" +
+                            "WHERE vel.vol_id=?"
+            );
+
+            getTime.setInt(1, volId);
+
+            ResultSet timeSet = getTime.executeQuery();
+
+            while (timeSet.next()) {
+                map.put(timeSet.getTimestamp("dateTime_start"), timeSet.getTimestamp("dateTime_end"));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return map;
+    }
+
     public static ArrayList<Event> getFinishedEvents(int volId) {
         try {
             ArrayList<Event> events = new ArrayList<>();

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resources.view.EditInformationScreen">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="394.0" layoutY="2.0" prefHeight="720.0">
+         <children>
+            <Label fx:id="warning_label" alignment="CENTER" text="message here (hide me)" textFill="#fe6d73">
+               <VBox.margin>
+                  <Insets bottom="30.0" top="100.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" text="Edit Volunteer Information" textFill="#227c9d">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefWidth="493.0" spacing="25.0">
+               <children>
+                  <VBox prefWidth="233.0">
+                     <children>
+                        <Label text="First Name" textFill="#227c9d">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="fName_field" disable="true" prefHeight="30.0" prefWidth="257.0" style="-fx-background-color: #227C9D; -fx-border-color: #227C9D; -fx-border-width: 2; -fx-border-radius: 4; -fx-text-fill: #FFFFFF; -fx-prompt-text-fill: #FFFFFF;" text="123">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Last Name" textFill="#227c9d">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="lName_field" disable="true" prefHeight="30.0" prefWidth="257.0" style="-fx-background-color: #227C9D; -fx-border-color: #227C9D; -fx-border-width: 2; -fx-border-radius: 4; -fx-text-fill: #FFFFFF; -fx-prompt-text-fill: #FFFFFF;" text="123">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Sex" textFill="#227c9d">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <ComboBox fx:id="sex_field" disable="true" prefHeight="30.0" prefWidth="257.0" style="-fx-background-color: #227C9D; -fx-border-color: #227C9D; -fx-border-width: 2; -fx-border-radius: 4; -fx-text-fill: #FFFFFF; -fx-prompt-text-fill: #FFFFFF;">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                        <Label text="Birth Date" textFill="#227c9d">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <DatePicker fx:id="date_picker" disable="true" editable="false" prefHeight="31.0" prefWidth="257.0" promptText="asd" style="-fx-border-color: #227C9D; -fx-border-width: 2; -fx-border-radius: 4;">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </DatePicker>
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="233.0">
+                     <children>
+                        <Label text="Phone Number" textFill="#227c9d">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="phone_field" prefHeight="30.0" prefWidth="257.0" style="-fx-background-color: #FEF9EF; -fx-border-color: #227C9D; -fx-border-width: 2; -fx-border-radius: 4;">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Volunteer Type" textFill="#227c9d">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <ComboBox fx:id="type_field" disable="true" prefHeight="30.0" prefWidth="257.0" style="-fx-background-color: #227C9D; -fx-border-color: #227C9D; -fx-border-width: 2; -fx-border-radius: 4; -fx-text-fill: #FFFFFF; -fx-prompt-text-fill: #FFFFFF;">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                        <Label text="Degree Program" textFill="#227c9d">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <ComboBox fx:id="program_field" disable="true" prefHeight="30.0" prefWidth="257.0" style="-fx-background-color: #227C9D; -fx-border-color: #227C9D; -fx-border-width: 2; -fx-border-radius: 4; -fx-text-fill: #FFFFFF; -fx-prompt-text-fill: #FFFFFF;">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                        <Label text="Collegiate Year" textFill="#227c9d">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <ComboBox fx:id="year_field" disable="true" prefHeight="30.0" prefWidth="257.0" style="-fx-background-color: #227C9D; -fx-border-color: #227C9D; -fx-border-width: 2; -fx-border-radius: 4; -fx-text-fill: #FFFFFF; -fx-prompt-text-fill: #FFFFFF;">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Label prefHeight="19.0" prefWidth="493.0" text="Address" textFill="#227c9d">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="2.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="4.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="address_field" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="493.0" style="-fx-background-color: #FEF9EF; -fx-border-color: #227C9D; -fx-border-width: 2; -fx-border-radius: 3;">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Label fx:id="changePass_button" text="CHANGE PASSWORD" textFill="#227c9d">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <HBox alignment="CENTER" spacing="15.0">
+               <children>
+                  <Label fx:id="cancel_button" text="cancel" textFill="#fe6d73">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Button fx:id="create_button" mnemonicParsing="false" onAction="#onCreateAccount" prefHeight="30.0" prefWidth="233.0" style="-fx-background-color: #0BB180;" text="SAVE CHANGES" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets right="51.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
