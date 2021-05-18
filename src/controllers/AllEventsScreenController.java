@@ -32,16 +32,7 @@ public class AllEventsScreenController implements Initializable {
     private Role selectedRole;
     private Volunteer vol;
     private SubmitConcernScreenController submitConcernScreenController;
-
-    /**
-     * Values: ALL_EVENTS, MY_EVENTS
-     */
-    private String eventsType = "ALL_EVENTS";
-
-    /**
-     * Values: ONGOING, FINISHED
-     */
-    private String eventsSortType = "ONGOING";
+    private Event selectedEvent;
 
     public VBox vboxVol1;
     public VBox vboxVol2;
@@ -129,34 +120,13 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onEventsTypeToggle(ActionEvent event) {
-        if (eventsType.equals("ALL_EVENTS"))
-            eventsType = "MY_EVENTS";
-        else
-            eventsType = "ALL_EVENTS";
 
-        if (eventsType_button.getText().equals("All Events"))
-            eventsType_button.setText("My Events");
-        else
-            eventsType_button.setText("All Events");
-
-        updateEventsPanel();
-    }
-
-    private void updateEventsPanel() {
-        if (eventsSortType.equals("ONGOING") && eventsType.equals("ALL_EVENTS"))
-            initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents()));
-        if (eventsSortType.equals("ONGOING") && eventsType.equals("MY_EVENTS"))
-            initializeEventsPanel(Objects.requireNonNull(DBConnector.getOngoingJoinedEvents(vol.getVolId())));
-        if (eventsSortType.equals("FINISHED") && eventsType.equals("ALL_EVENTS"))
-            initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllFinishedEvents()));
-        if (eventsSortType.equals("FINISHED") && eventsType.equals("MY_EVENTS"))
-            initializeEventsPanel(Objects.requireNonNull(DBConnector.getFinishedJoinedEvents(vol.getVolId())));
     }
 
     @FXML
     void onFinishedToggle(MouseEvent event) {
-        eventsSortType = "FINISHED";
-        updateEventsPanel();
+        events_vbox.getChildren().clear();
+        initializeEventsPanel(Objects.requireNonNull(DBConnector.getFinishedEvents(vol.getVolId())));
         join_button.setDisable(true);
     }
 
@@ -192,9 +162,7 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onOngoingToggle(MouseEvent event) {
-        eventsSortType = "ONGOING";
-        updateEventsPanel();
-//        initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
+        initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
         join_button.setDisable(false);
     }
 
@@ -290,7 +258,6 @@ public class AllEventsScreenController implements Initializable {
     }
 
     private void initializeEventsPanel(ArrayList<Event> events) {
-        events_vbox.getChildren().clear();
         assert events != null;
         try {
             Platform.runLater(() -> events_vbox.getChildren().clear());
@@ -304,6 +271,7 @@ public class AllEventsScreenController implements Initializable {
                     e.setSchedules(DBConnector.getEventSchedules(e.getEvent_id()));
                     System.out.println(e.getSchedules());
                     setRightCardProperties(e);
+                    selectedEvent = e;
                 });
 
                 // set card properties
@@ -364,8 +332,7 @@ public class AllEventsScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
-        updateEventsPanel();
+        initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
         name_label.setText(vol.getFirstName() + " " + vol.getLastName());
 
         //Date object
