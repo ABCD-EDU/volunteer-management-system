@@ -2,6 +2,7 @@ package client;
 
 import models.Concern;
 import models.Event;
+import models.EventSchedule;
 import models.User;
 import models.Volunteer;
 
@@ -455,5 +456,26 @@ public class DBConnector {
         }
         return -1;
     }
-    
+
+//    public static ArrayList<EventSchedule> getEventSchedules(int event_id){
+//        List<EventSchedule> schedChoices = new ArrayList<>();
+//        try{
+//            PreparedStatement schedulesFromAnEventQuery = con.prepareStatement(
+//                    "SELECT * FROM event_shedule AS es WHERE es.event_id=?");
+//
+//            schedulesFromAnEventQuery.setInt(1, event_id);
+//
+//            ResultSet schedules = schedulesFromAnEventQuery.executeQuery();
+//            while (schedules.next()){
+//
+//            }
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//    }
+
+    public static boolean joinEvent(int vol_id, EventSchedule chosenSchedule){
+        return true;
+    }
+
 }
