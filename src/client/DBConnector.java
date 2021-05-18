@@ -73,7 +73,7 @@ public class DBConnector {
         return events;
     }
 
-    public static ArrayList<Event> getAllOngoingEvents(int volId) {
+    public static ArrayList<Event> getAllOngoingEvents() {
         ArrayList<Event> events = new ArrayList<>();
         try {
             PreparedStatement statement = DBConnector.con.prepareStatement(
@@ -132,7 +132,7 @@ public class DBConnector {
                 sex = Volunteer.Sex.MALE;
 
             volunteer = new Volunteer(
-                     rs.getString(2), rs.getString(3), uType, rs.getInt(5),
+                    rs.getString(2), rs.getString(3), uType, rs.getInt(5),
                     rs.getString(6), rs.getString(7), rs.getDate(8),
                     rs.getString(9), rs.getLong(10), vType, rs.getInt(12),
                     rs.getString(13), sex, rs.getInt(1));
@@ -141,38 +141,6 @@ public class DBConnector {
         }
         return volunteer;
     }
-
-
-//    public static ArrayList<Event> getFinishedJoinedEvents(int volId) {
-//        ArrayList<Event> events = new ArrayList<>();
-//        try {
-//            PreparedStatement statement = DBConnector.con.prepareStatement(
-//                    "SELECT\n" +
-//                            "    *\n" +
-//                            "FROM EVENT\n" +
-//                            "WHERE\n" +
-//                            "    event_id IN(\n" +
-//                            "    SELECT DISTINCT\n" +
-//                            "        event_schedule.event_id\n" +
-//                            "    FROM\n" +
-//                            "        event_schedule\n" +
-//                            "    LEFT JOIN volunteer_event_list USING(sched_id)\n" +
-//                            "    WHERE\n" +
-//                            "        dateTime_end > CURRENT_TIMESTAMP AND vol_id = ?" +
-//                            ")"
-//            );
-//            statement.setInt(1, volId);
-//            ResultSet rs = statement.executeQuery();
-//            while (rs.next()) {
-//                Event e = new Event(rs.getInt(1), rs.getString(2), rs.getString(3));
-//                events.add(e);
-//            }
-//        }catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//        return events;
-//    }
 
 
     /**
@@ -279,71 +247,6 @@ public class DBConnector {
      *                   2 - will return all events a volunteer is part of
      */
 //    public static List<Event> getEventsOfVolunteer(Volunteer v, int type) {
-//        List<Event> events = new ArrayList<>();
-//        try {
-//            String query = "SELECT\n" +
-//                    "    e.name e_name,\n" +
-//                    "    e.event_id e_id,\n" +
-//                    "    e.description e_desc,\n" +
-//                    "    s.dateTime_start s_start,\n" +
-//                    "    s.dateTime_end s_end,\n" +
-//                    "    s.location s_location,\n" +
-//                    "    s.vol_limit s_limit,\n" +
-//                    "    s.sched_id s_id\n" +
-//                    "FROM\n" +
-//                    "    volunteer_event_list AS v\n" +
-//                    "INNER JOIN events_schedule AS s USING(sched_id)\n" +
-//                    "NATURAL JOIN EVENT AS e \n" +
-//                    "WHERE\n" +
-//                    "    v.user_id = ?";
-//            PreparedStatement s = null;
-//            if (type == 2) {
-//                s = con.prepareStatement(query);
-//            }else if (type == 1 | type == 0) {
-//                query = query + " AND v.is_verified = ?";
-//                s = con.prepareStatement(query);
-//                s.setInt(2, type);
-//            }else {
-//                throw new IllegalArgumentException();
-//            }
-////            s.setInt(1, v.getId());
-//            ResultSet rs = s.executeQuery();
-//            // For ever tuple
-//            while (rs.next()) {
-//                int eventID = rs.getInt(2);
-//                // If event does not exist create the event
-//                if (!events.contains(new Event(eventID))) {
-//                    // Get list of roles for event
-//                    PreparedStatement rolesStatement = con.prepareStatement(
-//                      "SELECT * FROM EVENT_ROLES WHERE event_id = ?"
-//                    );
-//                    rolesStatement.setInt(1, eventID);
-//                    ResultSet rolesSet = rolesStatement.executeQuery();
-//                    List<Role> roles = new ArrayList<>();
-//                    while (rolesSet.next()) {
-//                        roles.add(new Role(rolesSet.getString(1), rolesSet.getString(2)));
-//                    }
-//                    // Add new event to list of events
-//                    List<EventSchedule> es = new ArrayList<>();
-//                    events.add(new Event(rs.getInt(2), rs.getString(1),
-//                            rs.getString(3), es, roles));
-//                }
-//                // Create event schedule
-//                EventSchedule es = new EventSchedule(rs.getTimestamp(4),
-//                        rs.getTimestamp(5), rs.getString(6),
-//                        rs.getInt(7), rs.getInt(8));
-//                // Add event schedule to list of schedules for appropriate event
-//                for (Event e : events) {
-//                    if (e.equals(new Event(eventID))) {
-//                        e.addSchedule(es);
-//                        break;
-//                    }
-//                }
-//            }
-//        }catch (SQLException | IllegalArgumentException e) {
-//            e.printStackTrace();
-//        }
-//        return events;
 //    }
 
     /**
@@ -444,7 +347,7 @@ public class DBConnector {
         return map;
     }
 
-    public static ArrayList<Event> getFinishedEvents(int volId) {
+    public static ArrayList<Event> getFinishedJoinedEvents(int volId) {
         try {
             ArrayList<Event> events = new ArrayList<>();
             PreparedStatement getFinished = DBConnector.con.prepareStatement("" +
@@ -464,6 +367,35 @@ public class DBConnector {
             );
             getFinished.setInt(1, volId);
 
+            ResultSet rs = getFinished.executeQuery();
+            while (rs.next()) {
+                Event e = new Event(rs.getInt(1), rs.getString(2), rs.getString(3));
+                events.add(e);
+            }
+            return events;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public static ArrayList<Event> getAllFinishedEvents() {
+        try {
+            ArrayList<Event> events = new ArrayList<>();
+            PreparedStatement getFinished = DBConnector.con.prepareStatement("" +
+                    "SELECT *\n" +
+                    "    FROM event\n" +
+                    "    INNER JOIN (\n" +
+                    "        SELECT es.event_id, MAX(es.dateTime_end) AS 'end'\n" +
+                    "        FROM event_schedule AS es\n" +
+                    "        INNER JOIN (\n" +
+                    "            SELECT vel.sched_id\n" +
+                    "            FROM volunteer_event_list AS vel\n" +
+                    "        )as in_sched USING (sched_id)\n" +
+                    "        GROUP BY es.event_id    \n" +
+                    "    ) as es_grp USING (event_id)\n" +
+                    "    WHERE es_grp.end < NOW()"
+            );
             ResultSet rs = getFinished.executeQuery();
             while (rs.next()) {
                 Event e = new Event(rs.getInt(1), rs.getString(2), rs.getString(3));
