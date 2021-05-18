@@ -11,14 +11,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FEF9EF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="56.0" prefWidth="1280.0" style="-fx-background-color: #227C9D;">
          <children>
-            <HBox fx:id="windowHeader" prefHeight="56.0" prefWidth="1280.0" style="-fx-background-color: n;">
+            <HBox fx:id="windowHeader" prefHeight="56.0" prefWidth="1280.0">
                <padding>
                   <Insets left="257.0" right="257.0" />
                </padding>
@@ -112,58 +111,7 @@
                         </HBox>
                         <ScrollPane prefHeight="618.0" prefWidth="261.0" style="-fx-background-color: #FEF9EF; -fx-background: #FEF9EF;">
                            <content>
-                              <VBox fx:id="events_vbox" alignment="TOP_CENTER" prefHeight="616.0" prefWidth="233.0" spacing="20.0">
-                                 <children>
-                                    <Pane prefHeight="120.0" prefWidth="233.0" style="-fx-border-color: #FFCB77; -fx-border-width: 3; -fx-border-radius: 10;">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </Pane>
-                                    <Pane prefHeight="120.0" prefWidth="233.0" style="-fx-background-color: #FFCB77; -fx-background-radius: 10;">
-                                       <children>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0bb180" height="30.0" layoutY="25.0" stroke="#0bb180" strokeType="INSIDE" width="233.0" />
-                                          <VBox alignment="TOP_CENTER" prefHeight="120.0" prefWidth="233.0">
-                                             <children>
-                                                <Label text="Event Name" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="System Bold" size="14.0" />
-                                                   </font>
-                                                   <VBox.margin>
-                                                      <Insets top="30.0" />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label text="January 17, 2021" textFill="#444444">
-                                                   <VBox.margin>
-                                                      <Insets top="14.0" />
-                                                   </VBox.margin>
-                                                   <font>
-                                                      <Font name="System Bold" size="11.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label text="2:00 PM - 4:00 PM" textFill="#444444">
-                                                   <font>
-                                                      <Font name="System Bold" size="11.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </Pane>
-                                    <Pane prefHeight="120.0" prefWidth="233.0" style="-fx-border-color: #FFCB77; -fx-border-width: 3; -fx-border-radius: 10;">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </Pane>
-                                    <Pane prefHeight="120.0" prefWidth="233.0" style="-fx-border-color: #FFCB77; -fx-border-width: 3; -fx-border-radius: 10;">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </Pane>
-                                 </children>
-                              </VBox>
+                              <VBox fx:id="events_vbox" alignment="TOP_CENTER" prefHeight="616.0" prefWidth="233.0" spacing="20.0" />
                            </content>
                            <VBox.margin>
                               <Insets />
@@ -173,61 +121,23 @@
                   </VBox>
                   <VBox prefWidth="475.0">
                      <children>
-                        <HBox>
-                           <children>
-                              <Label text="My Role(s): " textFill="#227c9d">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets left="6.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Label fx:id="userRole_label" text="Schedule - role" textFill="#fe6d73">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="22.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="7.0" />
-                           </padding>
-                        </HBox>
-                        <ScrollPane style="-fx-background-color: #FEF9EF; -fx-background: #FEF9EF;">
+                        <ScrollPane prefHeight="687.0" prefWidth="475.0" style="-fx-background-color: #FEF9EF; -fx-background: #FEF9EF;">
                            <content>
-                              <VBox prefHeight="616.0" prefWidth="445.0">
+                              <VBox prefWidth="445.0">
                                  <children>
                                     <Pane prefHeight="400.0" prefWidth="445.0" style="-fx-background-color: #FFCB77; -fx-background-radius: 10;">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
                                        <children>
-                                          <Pane prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: #0BB180; -fx-background-radius: 10 10 0 0;" />
-                                          <VBox fx:id="mainCardHeader" alignment="CENTER" prefHeight="50.0" prefWidth="445.0">
+                                          <Pane prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: #227C9D; -fx-background-radius: 10 10 0 0;">
                                              <children>
-                                                <Label fx:id="eventName_label" text="Event Name" textFill="WHITE">
+                                                <Label fx:id="eventName_label" alignment="CENTER" layoutX="13.0" prefHeight="50.0" prefWidth="420.0" text="Event Name" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                                    <font>
-                                                      <Font name="System Bold" size="15.0" />
+                                                      <Font name="System Bold" size="16.0" />
                                                    </font>
-                                                   <VBox.margin>
-                                                      <Insets bottom="-3.0" />
-                                                   </VBox.margin>
                                                 </Label>
-                                                <HBox alignment="CENTER" prefWidth="200.0">
-                                                   <children>
-                                                      <Label text="hosted by: " textFill="WHITE" />
-                                                      <Label text="ABCD" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="System Bold" size="11.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
+                                             </children></Pane>
                                           <ScrollPane layoutY="50.0" prefHeight="350.0" prefWidth="445.0" style="-fx-background-color: #FFCB77; -fx-background: #FFCB77;">
                                              <content>
                                                 <VBox prefWidth="430.0">
@@ -236,10 +146,13 @@
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
+                                                         <VBox.margin>
+                                                            <Insets top="15.0" />
+                                                         </VBox.margin>
                                                       </Label>
                                                       <Label fx:id="eventDesc_label" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in neque cursus, pretium magna quis, laoreet diam. Proin posuere, nibh ac sollicitudin fringilla, velit leo maximus felis, a porttitor metus justo quis enim. Aliquam vitae velit in diam semper dictum ut ut metus. Pellentesque ipsum ligula, accumsan ut suscipit id, facilisis et odio. Nullam maximus facilisis pulvinar. Morbi commodo quam pulvinar placerat blandit." wrapText="true">
                                                          <VBox.margin>
-                                                            <Insets bottom="10.0" />
+                                                            <Insets bottom="15.0" />
                                                          </VBox.margin>
                                                       </Label>
                                                       <Label text="Available Schedules">
@@ -247,62 +160,81 @@
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
                                                          <VBox.margin>
-                                                            <Insets bottom="5.0" />
+                                                            <Insets bottom="3.0" />
                                                          </VBox.margin>
                                                       </Label>
-                                                      <HBox spacing="15.0">
-                                                         <children>
-                                                            <ComboBox fx:id="sched_comboBox" onAction="#onScheduleChange" prefHeight="27.0" prefWidth="392.0" promptText="Schedule" style="-fx-background-color: #FFCB77; -fx-border-color: #555555; -fx-border-radius: 3;" />
-                                                         </children>
+                                                      <ComboBox fx:id="sched_comboBox" onAction="#onScheduleChange" prefHeight="27.0" prefWidth="392.0" promptText="Schedule" style="-fx-background-color: #FEF9EF;">
                                                          <VBox.margin>
-                                                            <Insets bottom="10.0" />
+                                                            <Insets bottom="6.0" />
                                                          </VBox.margin>
-                                                      </HBox>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </ComboBox>
                                                       <Label text="Location">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
                                                       </Label>
-                                                      <VBox>
-                                                         <children>
-                                                            <Label fx:id="location_label" text="- 8:00 am - 12:00 pm" />
-                                                         </children>
-                                                      </VBox>
-                                                      <Label text="Start Date &amp; Time">
-                                                         <font>
-                                                            <Font name="System Bold" size="12.0" />
-                                                         </font>
+                                                      <Label fx:id="location_label" text="Somewhere street, far far away">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" />
+                                                         </VBox.margin>
                                                       </Label>
-                                                      <VBox>
+                                                      <VBox />
+                                                      <HBox spacing="40.0">
                                                          <children>
-                                                            <Label fx:id="startDateTime_label" text="- 8:00 am - 12:00 pm" />
-                                                         </children>
-                                                      </VBox>
-                                                      <Label text="End Date &amp; Time">
-                                                         <font>
-                                                            <Font name="System Bold" size="12.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <VBox>
-                                                         <children>
-                                                            <Label fx:id="endDateTime_label" text="- 8:00 am - 12:00 pm" />
+                                                            <VBox>
+                                                               <children>
+                                                                  <Label text="Start (Date &amp; Time)">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <VBox>
+                                                                     <children>
+                                                                        <Label fx:id="startDateTime_label" text="8:00 am - 12:00 pm" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox>
+                                                               <children>
+                                                                  <Label text="End (Date &amp; Time)">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <VBox>
+                                                                     <children>
+                                                                        <Label fx:id="endDateTime_label" text="8:00 am - 12:00 pm" />
+                                                                     </children>
+                                                                     <VBox.margin>
+                                                                        <Insets />
+                                                                     </VBox.margin>
+                                                                  </VBox>
+                                                               </children>
+                                                            </VBox>
                                                          </children>
                                                          <VBox.margin>
-                                                            <Insets bottom="10.0" />
+                                                            <Insets bottom="15.0" />
                                                          </VBox.margin>
-                                                      </VBox>
+                                                      </HBox>
                                                       <Label text="Roles">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
                                                          <VBox.margin>
-                                                            <Insets bottom="5.0" />
+                                                            <Insets bottom="3.0" />
                                                          </VBox.margin>
                                                       </Label>
-                                                      <ComboBox fx:id="roles_comboBox" onAction="#onRolesChange" prefWidth="225.0" promptText="Roles" style="-fx-background-color: #FFCB77; -fx-border-color: #555555; -fx-border-radius: 3;">
+                                                      <ComboBox fx:id="roles_comboBox" onAction="#onRolesChange" prefWidth="225.0" promptText="Roles" style="-fx-background-color: #FEF9EF;">
                                                          <VBox.margin>
-                                                            <Insets bottom="10.0" />
+                                                            <Insets bottom="6.0" />
                                                          </VBox.margin>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
                                                       </ComboBox>
                                                       <Label text="Role Description">
                                                          <font>
@@ -314,7 +246,7 @@
                                                       </Label>
                                                       <Label fx:id="rolesDesc_label" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in neque cursus, pretium magna quis, laoreet diam. Proin posuere, nibh ac sollicitudin fringilla." wrapText="true">
                                                          <VBox.margin>
-                                                            <Insets bottom="10.0" />
+                                                            <Insets bottom="5.0" />
                                                          </VBox.margin>
                                                       </Label>
                                                       <Label text="Role Requirements">
@@ -327,10 +259,13 @@
                                                             <Label fx:id="programReq_label" text="- Requirement 1" wrapText="true" />
                                                             <Label fx:id="yearReq_label" text="- Requirement 2" wrapText="true" />
                                                          </children>
+                                                         <VBox.margin>
+                                                            <Insets bottom="20.0" />
+                                                         </VBox.margin>
                                                       </VBox>
                                                    </children>
                                                    <padding>
-                                                      <Insets left="20.0" right="20.0" top="10.0" />
+                                                      <Insets left="20.0" right="20.0" />
                                                    </padding>
                                                 </VBox>
                                              </content>
@@ -339,7 +274,7 @@
                                     </Pane>
                                     <HBox prefWidth="200.0" spacing="20.0">
                                        <children>
-                                          <Button fx:id="join_button" mnemonicParsing="false" onAction="#onJoinEvent" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #FE6D73; -fx-background-radius: 5;" text="Join Event!" textFill="WHITE">
+                                          <Button fx:id="join_button" mnemonicParsing="false" onAction="#onJoinEvent" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #0BB180; -fx-background-radius: 5;" text="Join Event!" textFill="WHITE">
                                              <HBox.margin>
                                                 <Insets left="6.0" />
                                              </HBox.margin>
@@ -363,9 +298,32 @@
                                           <Insets top="15.0" />
                                        </VBox.margin>
                                     </HBox>
+                                    <HBox>
+                                       <children>
+                                          <Label text="My Role(s): " textFill="#333333">
+                                             <cursor>
+                                                <Cursor fx:constant="DEFAULT" />
+                                             </cursor>
+                                             <HBox.margin>
+                                                <Insets left="6.0" />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="userRole_label" maxWidth="350.0" text="Schedule - role" textFill="#0bb180" wrapText="true">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="15.0" />
+                                       </VBox.margin>
+                                    </HBox>
                                     <HBox prefWidth="200.0" spacing="3.0">
                                        <children>
-                                          <Label text="Volunteers -" textFill="#222222">
+                                          <Label text="Volunteers -" textFill="#333333">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -380,17 +338,17 @@
                                           <Insets left="6.0" top="12.0" />
                                        </VBox.margin>
                                     </HBox>
-                                    <HBox prefHeight="133.0" spacing="25.0">
+                                    <HBox prefWidth="439.0" spacing="25.0">
                                        <children>
-                                          <VBox fx:id="vboxVol1" prefHeight="200.0">
+                                          <VBox fx:id="vboxVol1">
                                              <children>
                                              </children>
                                           </VBox>
-                                          <VBox fx:id="vboxVol2" prefHeight="200.0">
+                                          <VBox fx:id="vboxVol2">
                                              <children>
                                              </children>
                                           </VBox>
-                                          <VBox fx:id="vboxVol3" prefHeight="200.0">
+                                          <VBox fx:id="vboxVol3">
                                              <children>
                                              </children>
                                           </VBox>
@@ -402,6 +360,9 @@
                                  </children>
                               </VBox>
                            </content>
+                           <VBox.margin>
+                              <Insets top="46.0" />
+                           </VBox.margin>
                         </ScrollPane>
                      </children>
                      <HBox.margin>

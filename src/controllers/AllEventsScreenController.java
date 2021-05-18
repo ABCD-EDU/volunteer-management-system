@@ -155,6 +155,10 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onFinishedToggle(MouseEvent event) {
+        finishedEvents_toggle.setStyle("-fx-text-fill: #0BB180");
+        finishedEvents_toggle.setText("Finished");
+        ongoingEvents_toggle.setStyle("-fx-text-fill: #9DDCC3");
+        ongoingEvents_toggle.setText("Ongoing");
         eventsSortType = "FINISHED";
         updateEventsPanel();
         join_button.setDisable(true);
@@ -192,6 +196,10 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onOngoingToggle(MouseEvent event) {
+        ongoingEvents_toggle.setStyle("-fx-text-fill: #0BB180");
+        ongoingEvents_toggle.setText("Ongoing");
+        finishedEvents_toggle.setStyle("-fx-text-fill: #9DDCC3");
+        finishedEvents_toggle.setText("Finished");
         eventsSortType = "ONGOING";
         updateEventsPanel();
 //        initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
