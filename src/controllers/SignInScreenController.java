@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import models.Volunteer;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -91,6 +92,7 @@ public class SignInScreenController {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void onSignUpPress(MouseEvent event) {

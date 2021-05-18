@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -32,6 +33,8 @@ public class AllEventsScreenController implements Initializable {
     private Role selectedRole;
     private Volunteer vol;
     private SubmitConcernScreenController submitConcernScreenController;
+
+    private Event selectedEvent;
 
     /**
      * Values: ALL_EVENTS, MY_EVENTS
@@ -123,9 +126,59 @@ public class AllEventsScreenController implements Initializable {
     }
 
     @FXML
-    void onEditInfo(MouseEvent event) {
+    void onSubmitConcern(ActionEvent event) {
+        try {
+            showSubmitConcernScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
+    private void showSubmitConcernScreen() throws Exception{
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("../resources/view/SubmitConcernScreen.fxml"));
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(loader.load()));
+            submitConcernScreenController = loader.getController();
+            submitConcernScreenController.setCurrentlyChosenEvent(eventName_label.getText());
+            submitConcernScreenController.setVol(vol);
+            submitConcernScreenController.setEs(selectedSched);
+
+            stage.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @FXML
+    void onEditInfo(MouseEvent event) {
+       try {
+           showEditInfoScreen();
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+    }
+
+    private void showEditInfoScreen() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("../resources/view/EditInformation.fxml"));
+
+            EditInformationController editInformationController = new EditInformationController(vol,
+                    (Stage) concern_button.getScene().getWindow());
+            loader.setController(editInformationController);
+
+            Stage stage = (Stage) concern_button.getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     void onEventsTypeToggle(ActionEvent event) {
@@ -242,32 +295,7 @@ public class AllEventsScreenController implements Initializable {
         }
     }
 
-    @FXML
-    void onSubmitConcern(ActionEvent event) {
-        try {
-            showSubmitConcernScreen();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-    }
-    private void showSubmitConcernScreen() throws Exception{
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("../resources/view/SubmitConcernScreen.fxml"));
-            Stage stage = new Stage(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(loader.load()));
-            submitConcernScreenController = loader.getController();
-            submitConcernScreenController.setCurrentlyChosenEvent(eventName_label.getText());
-            submitConcernScreenController.setVol(vol);
-            submitConcernScreenController.setEs(selectedSched);
-
-            stage.show();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
 
     private void loadVolunteers(ArrayList<String> volunteers, int schedId) {
 //        ArrayList<String> volunteers = DBConnector.getVolunteers(schedId);
@@ -312,6 +340,7 @@ public class AllEventsScreenController implements Initializable {
                     e.setSchedules(DBConnector.getEventSchedules(e.getEvent_id()));
                     System.out.println(e.getSchedules());
                     setRightCardProperties(e);
+                    selectedEvent = e;
                 });
 
                 // set card properties
@@ -373,7 +402,6 @@ public class AllEventsScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
-        updateEventsPanel();
         name_label.setText(vol.getFirstName() + " " + vol.getLastName());
 
         //Date object

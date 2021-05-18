@@ -90,7 +90,6 @@ public class SubmitConcernScreenController implements Initializable{
     }
     
     public void initializeComboBox(){
-
         List<Concern.Type> yourEnums = Arrays.asList(Concern.Type.values());
         List<String> enumsInString = yourEnums.stream()
                 .map(Enum::toString)

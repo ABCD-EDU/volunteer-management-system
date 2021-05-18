@@ -552,7 +552,60 @@ public class DBConnector {
         }
     }
 
-    public static boolean joinEvent(int vol_id, EventSchedule chosenSchedule){
+    public static boolean updateAddressAndPhoneNumber(String address, Long phoneNumber, int volID){
+        try{
+            PreparedStatement statement = con.prepareStatement(
+                    "UPDATE volunteer_info SET address = ?, phone_number =? where vol_id = ?"
+            );
+            statement.setString(1, address);
+            statement.setLong(2, phoneNumber);
+            statement.setInt(3, volID);
+
+            statement.executeUpdate();
+            return true;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static String getPassword(int user_id){
+        try {
+            PreparedStatement statement= con.prepareStatement(
+                    "SELECT password FROM user_acc WHERE user_id = ?"
+            );
+
+            statement.setInt(1,user_id);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+
+            return rs.getString(1);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static boolean updatePassword(int user_id, String newPassword){
+        try{
+            PreparedStatement statement = con.prepareStatement(
+                    "UPDATE user_acc SET password = ? WHERE user_id = ?"
+            );
+            statement.setString(1, newPassword);
+            statement.setInt(2, user_id);
+
+            statement.executeUpdate();
+            return true;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean joinEvent(int vol_id, EventSchedule chosenSchedule) {
         return true;
     }
 
