@@ -42,7 +42,8 @@ public class DBConnector {
                             "            WHERE vel.vol_id=?\n" +
                             "        )as in_sched USING (sched_id)\n" +
                             "        GROUP BY es.event_id    \n" +
-                            "    ) as es_grp USING (event_id)\n"
+                            "    ) as es_grp USING (event_id)\n" +
+                            "    WHERE es_grp.end > NOW()"
             );
             statement.setInt(1, volId);
             ResultSet rs = statement.executeQuery();
@@ -71,7 +72,8 @@ public class DBConnector {
                             "            FROM volunteer_event_list AS vel\n" +
                             "        )as in_sched USING (sched_id)\n" +
                             "        GROUP BY es.event_id    \n" +
-                            "    ) as es_grp USING (event_id)\n"
+                            "    ) as es_grp USING (event_id)\n" +
+                            "    WHERE es_grp.end > NOW()"
             );
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
