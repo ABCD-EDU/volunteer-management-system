@@ -351,8 +351,21 @@ public class AllEventsScreenController implements Initializable {
         int isVerified = 1;
         if (selectedRole.isNeedsVerification())
             isVerified = 0;
-        DBConnector.joinVolunteerToSchedule(vol.getVolId(), selectedSched.getSchedId(),
-                selectedRole.getRoleId(), isVerified);
+        if (DBConnector.joinVolunteerToSchedule(vol.getVolId(), selectedSched.getSchedId(),
+                selectedRole.getRoleId(), isVerified)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            if (isVerified == 1)
+                alert.setContentText("You have successfully joined the event schedule");
+            else
+                alert.setContentText("Please wait for the verification of your join request");
+            alert.showAndWait();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Join Failed: Internal error in joining the event");
+            alert.showAndWait();
+        }
+
+
     }
 
     @FXML

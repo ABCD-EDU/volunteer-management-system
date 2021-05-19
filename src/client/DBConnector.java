@@ -279,7 +279,7 @@ public class DBConnector {
         }
     }
 
-    public static void joinVolunteerToSchedule(int volId, int schedId, int roleId, int isVerified) {
+    public static boolean joinVolunteerToSchedule(int volId, int schedId, int roleId, int isVerified) {
         try{
             PreparedStatement statement = DBConnector.con.prepareStatement(
                     "INSERT INTO volunteer_event_list(\n" +
@@ -295,9 +295,11 @@ public class DBConnector {
             statement.setInt(3,roleId);
             statement.setInt(4, isVerified);
             statement.executeUpdate();
+            return true;
         }catch (SQLException e){
             e.printStackTrace();
         }
+        return false;
     }
 
     public static boolean isVolParticipating(int voldId, int schedId) {
