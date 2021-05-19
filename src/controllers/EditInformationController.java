@@ -65,9 +65,6 @@ public class EditInformationController implements Initializable {
     @FXML
     private Button changepassword_button;
 
-
-
-
     @FXML
     private void onSaveChanges(){
 

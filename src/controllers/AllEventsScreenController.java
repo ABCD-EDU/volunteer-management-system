@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -15,9 +16,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Event;
@@ -234,7 +237,7 @@ public class AllEventsScreenController implements Initializable {
             name_label.setStyle("-fx-text-fill: #444444");
             logout_button.setStyle("-fx-text-fill: #fe6d73");
             eventsType_button.setStyle("-fx-background-color:  #227C9D; -fx-text-fill: #ffffff");
-            rightHeader.setStyle("-fx-background-color: #FFCB77");
+            rightHeader.setStyle("-fx-background-color: #FFCB77; -fx-background-radius: 10 10 0 0");
             eventName_label.setStyle("-fx-text-fill: #444444");
             rightPane.setStyle("-fx-background-color: #227C9D; -fx-background: #227C9D");
             description.setStyle("-fx-text-fill: #FFFFFF");
@@ -259,7 +262,7 @@ public class AllEventsScreenController implements Initializable {
             name_label.setStyle("-fx-text-fill: #ffffff");
             logout_button.setStyle("-fx-text-fill: #FFCB77");
             eventsType_button.setStyle("-fx-background-color:  #FFCB77; -fx-text-fill: #444444");
-            rightHeader.setStyle("-fx-background-color: #227C9D");
+            rightHeader.setStyle("-fx-background-color: #227C9D; -fx-background-radius: 10 10 0 0");
             eventName_label.setStyle("-fx-text-fill: #FFFFFF");
             rightPane.setStyle("-fx-background-color: #FFCB77; -fx-background: #FFCB77");
             description.setStyle("-fx-text-fill: #444444");
@@ -289,23 +292,15 @@ public class AllEventsScreenController implements Initializable {
 
     private void updateEventsPanel() {
         if (eventsSortType.equals("ONGOING") && eventsType.equals("ALL_EVENTS")) {
-            join_button.setDisable(false);
-            concern_button.setDisable(false);
             initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents()));
         }
         if (eventsSortType.equals("ONGOING") && eventsType.equals("MY_EVENTS")) {
-            join_button.setDisable(true);
-            concern_button.setDisable(false);
             initializeEventsPanel(Objects.requireNonNull(DBConnector.getOngoingJoinedEvents(vol.getVolId())));
         }
         if (eventsSortType.equals("FINISHED") && eventsType.equals("ALL_EVENTS")) {
-            join_button.setDisable(true);
-            concern_button.setDisable(true);
             initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllFinishedEvents()));
         }
         if (eventsSortType.equals("FINISHED") && eventsType.equals("MY_EVENTS")) {
-            join_button.setDisable(true);
-            concern_button.setDisable(false);
             initializeEventsPanel(Objects.requireNonNull(DBConnector.getFinishedJoinedEvents(vol.getVolId())));
         }
     }
@@ -352,19 +347,42 @@ public class AllEventsScreenController implements Initializable {
         int isVerified = 1;
         if (selectedRole.isNeedsVerification())
             isVerified = 0;
+        String message = "";
         if (DBConnector.joinVolunteerToSchedule(vol.getVolId(), selectedSched.getSchedId(),
                 selectedRole.getRoleId(), isVerified)) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             if (isVerified == 1)
-                alert.setContentText("You have successfully joined the event schedule");
+                message = "You have successfully joined the event schedule";
             else
-                alert.setContentText("Please wait for the verification of your join request");
-            alert.showAndWait();
+                message = "Please wait for the verification of your join request";
         }else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Join Failed: Internal error in joining the event");
-            alert.showAndWait();
+            message = "Join Failed: Internal error in joining the event";
         }
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../resources/view/PromptMessage.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Successful registration");
+
+            for (Node component : (((AnchorPane) root).getChildren())) {
+                if (component.getId() != null) {
+                    System.out.println(component.getId());
+                    if (component.getId().equals("message_label")) {
+                        ((Label) component).setText(message);
+                    }
+                    if (component.getId().equals("continue_button")) {
+                        component.setOnMouseClicked(e -> {
+                            stage.close();
+                        });
+                    }
+                }
+            }
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML

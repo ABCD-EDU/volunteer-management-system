@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #FEF9EF; -fx-border-color: #0BB180; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resources.view.PromptMessage">
+<AnchorPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #FEF9EF; -fx-border-color: #0BB180; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="message_label" layoutX="40.0" layoutY="26.0" prefHeight="95.0" prefWidth="270.0" text="Please wait for the verification of your join request" textAlignment="CENTER" textFill="#333333" wrapText="true">
          <font>
