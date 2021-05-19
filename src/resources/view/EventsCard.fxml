@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="event_card" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseHover" onMouseExited="#onMouseExit" prefHeight="120.0" prefWidth="233.0" style="-fx-background-color: #FFCB77; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AllEventsScreenController">
+<Pane fx:id="event_card" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="233.0" style="-fx-background-color: #FFCB77; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" layoutX="20.0" layoutY="17.0" prefHeight="87.0" prefWidth="194.0">
          <children>

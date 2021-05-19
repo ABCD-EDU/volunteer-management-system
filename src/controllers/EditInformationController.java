@@ -70,6 +70,28 @@ public class EditInformationController implements Initializable {
 
     @FXML
     private void onSaveChanges(){
+
+        try {
+            String number = phone_field.getText().trim();
+            Long.parseLong(number);
+            if (phone_field.getText().trim().length() != 11) {
+                warning_label.setText("Inputted phone number is malformed");
+                warning_label.setVisible(true);
+                return;
+            }
+        }catch (NumberFormatException e) {
+            e.printStackTrace();
+            warning_label.setText("Inputted phone number is malformed");
+            warning_label.setVisible(true);
+            return;
+        }
+
+        if (address_field.getText().isBlank()) {
+            warning_label.setText("Address field cannot be blank");
+            warning_label.setVisible(true);
+            return;
+        }
+
         Alert alert = new Alert(Alert.AlertType.NONE, "Confirm changes?", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES){

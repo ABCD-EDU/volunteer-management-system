@@ -511,15 +511,15 @@ public class AllEventsScreenController implements Initializable {
                 });
 
                 if (eventsType.equals("ALL_EVENTS"))
-                    ((Pane) node).setStyle("-fx-background-color: #FFCB77");
-                else ((Pane) node).setStyle("-fx-background-color: #227C9D");
+                    ((Pane) node).setStyle("-fx-background-color: #FFCB77; -fx-background-radius: 10");
+                else ((Pane) node).setStyle("-fx-background-color: #227C9D; -fx-background-radius: 10");
 
                 // set card properties
                 for (Node component : ((VBox)(((Pane) node).getChildren()).get(0)).getChildren()) {
                     if (eventsType.equals("ALL_EVENTS")) ((Label) component).setStyle("-fx-text-fill: #444444");
                     else ((Label) component).setStyle("-fx-text-fill: #FFFFFF");
 
-                    if (component.getId().equals("name_label"))
+                    if (component.getId().equals("event_label"))
                         ((Label) component).setText(e.getName());
                     if (component.getId().equals("date_label"))
                         ((Label) component).setText(date);
@@ -577,10 +577,6 @@ public class AllEventsScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateEventsPanel();
         name_label.setText(vol.getFirstName() + " " + vol.getLastName());
-
-        ongoingEvents_toggle.setStyle("-fx-text-fill: #0BB180");
-        ongoingEvents_toggle.setText("Ongoing");
-        finishedEvents_toggle.setStyle("-fx-text-fill: #9DDCC3");
-        finishedEvents_toggle.setText("Finished");
     }
+
 }
