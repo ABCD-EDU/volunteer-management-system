@@ -402,6 +402,7 @@ public class AllEventsScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
+        updateEventsPanel();
         name_label.setText(vol.getFirstName() + " " + vol.getLastName());
 
         //Date object

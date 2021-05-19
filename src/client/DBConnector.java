@@ -46,19 +46,22 @@ public class DBConnector {
         ArrayList<Event> events = new ArrayList<>();
         try {
             PreparedStatement statement = DBConnector.con.prepareStatement(
-                    "SELECT\n" +
-                            "    *\n" +
+                    "SELECT DISTINCT EVENT\n" +
+                            "    .event_id,\n" +
+                            "    EVENT.name,\n" +
+                            "    EVENT.description\n" +
                             "FROM EVENT\n" +
-                            "WHERE\n" +
-                            "    event_id IN(\n" +
+                            "INNER JOIN event_schedule USING(event_id)\n" +
+                            "WHERE EVENT\n" +
+                            "    .event_id IN(\n" +
                             "    SELECT DISTINCT\n" +
-                            "        event_schedule.event_id\n" +
+                            "        event_id\n" +
                             "    FROM\n" +
                             "        event_schedule\n" +
-                            "    LEFT JOIN volunteer_event_list USING(sched_id)\n" +
+                            "    INNER JOIN volunteer_event_list USING(sched_id)\n" +
                             "    WHERE\n" +
-                            "        dateTime_end > CURRENT_TIMESTAMP AND vol_id = ?" +
-                            ")"
+                            "        volunteer_event_list.vol_id = ?\n" +
+                            ") AND event_schedule.dateTime_end > CURRENT_TIMESTAMP"
             );
             statement.setInt(1, volId);
             ResultSet rs = statement.executeQuery();
@@ -351,21 +354,37 @@ public class DBConnector {
         try {
             ArrayList<Event> events = new ArrayList<>();
             PreparedStatement getFinished = DBConnector.con.prepareStatement("" +
-                    "SELECT *\n" +
-                    "    FROM event\n" +
-                    "    INNER JOIN (\n" +
-                    "        SELECT es.event_id, MAX(es.dateTime_end) AS 'end'\n" +
-                    "        FROM event_schedule AS es\n" +
-                    "        INNER JOIN (\n" +
-                    "            SELECT vel.sched_id\n" +
-                    "            FROM volunteer_event_list AS vel\n" +
-                    "            WHERE vel.vol_id=?\n" +
-                    "        )as in_sched USING (sched_id)\n" +
-                    "        GROUP BY es.event_id    \n" +
-                    "    ) as es_grp USING (event_id)\n" +
-                    "    WHERE es_grp.end < NOW()"
+                    "SELECT\n" +
+                    "    *\n" +
+                    "FROM EVENT\n" +
+                    "WHERE\n" +
+                    "    event_id NOT IN(\n" +
+                    "    SELECT DISTINCT EVENT\n" +
+                    "        .event_id\n" +
+                    "    FROM EVENT\n" +
+                    "INNER JOIN event_schedule USING(event_id)\n" +
+                    "WHERE EVENT\n" +
+                    "    .event_id IN(\n" +
+                    "    SELECT DISTINCT\n" +
+                    "        event_id\n" +
+                    "    FROM\n" +
+                    "        event_schedule\n" +
+                    "    INNER JOIN volunteer_event_list USING(sched_id)\n" +
+                    "    WHERE\n" +
+                    "        volunteer_event_list.vol_id = ?\n" +
+                    ") AND event_schedule.dateTime_end > CURRENT_TIMESTAMP\n" +
+                    ") AND event_id IN(\n" +
+                    "    SELECT DISTINCT\n" +
+                    "        event_id\n" +
+                    "    FROM\n" +
+                    "        event_schedule\n" +
+                    "    INNER JOIN volunteer_event_list USING(sched_id)\n" +
+                    "    WHERE\n" +
+                    "        volunteer_event_list.vol_id = ?\n" +
+                    ")"
             );
             getFinished.setInt(1, volId);
+            getFinished.setInt(2, volId);
 
             ResultSet rs = getFinished.executeQuery();
             while (rs.next()) {
@@ -383,18 +402,25 @@ public class DBConnector {
         try {
             ArrayList<Event> events = new ArrayList<>();
             PreparedStatement getFinished = DBConnector.con.prepareStatement("" +
-                    "SELECT *\n" +
-                    "    FROM event\n" +
-                    "    INNER JOIN (\n" +
-                    "        SELECT es.event_id, MAX(es.dateTime_end) AS 'end'\n" +
-                    "        FROM event_schedule AS es\n" +
-                    "        INNER JOIN (\n" +
-                    "            SELECT vel.sched_id\n" +
-                    "            FROM volunteer_event_list AS vel\n" +
-                    "        )as in_sched USING (sched_id)\n" +
-                    "        GROUP BY es.event_id    \n" +
-                    "    ) as es_grp USING (event_id)\n" +
-                    "    WHERE es_grp.end < NOW()"
+                    "SELECT\n" +
+                    "    *\n" +
+                    "FROM EVENT\n" +
+                    "WHERE\n" +
+                    "    event_id NOT IN(\n" +
+                    "    SELECT\n" +
+                    "        event_id\n" +
+                    "    FROM EVENT\n" +
+                    "WHERE\n" +
+                    "    event_id IN(\n" +
+                    "    SELECT DISTINCT\n" +
+                    "        event_schedule.event_id\n" +
+                    "    FROM\n" +
+                    "        event_schedule\n" +
+                    "    LEFT JOIN volunteer_event_list USING(sched_id)\n" +
+                    "    WHERE\n" +
+                    "        dateTime_end > CURRENT_TIMESTAMP\n" +
+                    ")\n" +
+                    ")"
             );
             ResultSet rs = getFinished.executeQuery();
             while (rs.next()) {
