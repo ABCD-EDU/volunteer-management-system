@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -19,8 +18,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Event;
@@ -161,8 +158,14 @@ public class AllEventsScreenController implements Initializable {
     @FXML
     private Label role_requirements;
 
+    @FXML
+    private Pane event_card;
 
+    @FXML
+    private Label event_label;
 
+    @FXML
+    private Label date_label;
 
 
     public void setVol(Volunteer vol) {
@@ -196,7 +199,6 @@ public class AllEventsScreenController implements Initializable {
 
     }
 
-
     @FXML
     void onEditInfo(MouseEvent event) {
        try {
@@ -222,7 +224,6 @@ public class AllEventsScreenController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     void onEventsTypeToggle(ActionEvent event) {
@@ -364,8 +365,6 @@ public class AllEventsScreenController implements Initializable {
             alert.setContentText("Join Failed: Internal error in joining the event");
             alert.showAndWait();
         }
-
-
     }
 
     @FXML
@@ -434,6 +433,32 @@ public class AllEventsScreenController implements Initializable {
         initializeEventsPanel(events);
     }
 
+    @FXML
+    void onMouseHover(KeyEvent event) {
+        if (eventsType.equals("ALL_EVENTS")) {
+            event_card.setStyle("-fx-background-color: #227C9D");
+            event_label.setStyle("-fx-text-fill: #FFFFFF");
+            date_label.setStyle("-fx-text-fill: #FFFFFF");
+        } else {
+            event_card.setStyle("-fx-background-color: #FFCB77");
+            event_label.setStyle("-fx-text-fill: #444444");
+            date_label.setStyle("-fx-text-fill: #444444");
+        }
+    }
+
+    @FXML
+    void onMouseExit(KeyEvent event) {
+        if (eventsType.equals("ALL_EVENTS")) {
+            event_card.setStyle("-fx-background-color: #FFCB77");
+            event_label.setStyle("-fx-text-fill: #444444");
+            date_label.setStyle("-fx-text-fill: #444444");
+        } else {
+            event_card.setStyle("-fx-background-color: #227C9D");
+            event_label.setStyle("-fx-text-fill: #FFFFFF");
+            date_label.setStyle("-fx-text-fill: #FFFFFF");
+        }
+    }
+
     private void loadVolunteers(ArrayList<String> volunteers, int schedId) {
 //        ArrayList<String> volunteers = DBConnector.getVolunteers(schedId);
         int division = Math.round(((float)volunteers.size()/3));
@@ -468,7 +493,7 @@ public class AllEventsScreenController implements Initializable {
         try {
             Platform.runLater(() -> events_vbox.getChildren().clear());
             for (Event e : events) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/view/AllEventsCard.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/view/EventsCard.fxml"));
                 Node node = loader.load();
 
                 Timestamp ts = DBConnector.getUpcomingDate(e.getEvent_id());
@@ -491,6 +516,9 @@ public class AllEventsScreenController implements Initializable {
 
                 // set card properties
                 for (Node component : ((VBox)(((Pane) node).getChildren()).get(0)).getChildren()) {
+                    if (eventsType.equals("ALL_EVENTS")) ((Label) component).setStyle("-fx-text-fill: #444444");
+                    else ((Label) component).setStyle("-fx-text-fill: #FFFFFF");
+
                     if (component.getId().equals("name_label"))
                         ((Label) component).setText(e.getName());
                     if (component.getId().equals("date_label"))
