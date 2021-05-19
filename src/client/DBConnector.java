@@ -25,23 +25,6 @@ public class DBConnector {
         }
     }
 
-//    public static ArrayList<Event> getAllOngoingEvents() {
-//        ArrayList<Event> events = new ArrayList<>();
-//        try {
-//            PreparedStatement statement = DBConnector.con.prepareStatement(
-//                    ""
-//            );
-//
-//        }catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
-//    public static ArrayList<Event> getAllFinishedEvents() {
-//
-//    }
-
     public static ArrayList<Event> getOngoingJoinedEvents(int volId) {
         ArrayList<Event> events = new ArrayList<>();
         try {
@@ -145,6 +128,28 @@ public class DBConnector {
         return volunteer;
     }
 
+    public static Timestamp getUpcomingDate(int eventId) {
+        try {
+            PreparedStatement statement = DBConnector.con.prepareStatement(
+                    "SELECT\n" +
+                            "    dateTime_start\n" +
+                            "FROM\n" +
+                            "    event_schedule\n" +
+                            "WHERE\n" +
+                            "    event_schedule.event_id = ? AND dateTime_start > CURRENT_DATE\n" +
+                            "ORDER BY\n" +
+                            "    dateTime_start ASC\n" +
+                            "LIMIT 1"
+            );
+            statement.setInt(1, eventId);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            return rs.getTimestamp(1);
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     /**
      *

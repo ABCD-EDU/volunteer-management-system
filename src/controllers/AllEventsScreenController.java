@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -53,7 +54,7 @@ public class AllEventsScreenController implements Initializable {
     private HBox windowHeader;
 
     @FXML
-    private TextField eventSearchField;
+    private TextField eventSearch_field;
 
     @FXML
     private Button eventsType_button;
@@ -206,6 +207,18 @@ public class AllEventsScreenController implements Initializable {
             initializeEventsPanel(Objects.requireNonNull(DBConnector.getFinishedJoinedEvents(vol.getVolId())));
     }
 
+    private ArrayList<Event> getListOfEvents() {
+        if (eventsSortType.equals("ONGOING") && eventsType.equals("ALL_EVENTS"))
+            return (Objects.requireNonNull(DBConnector.getAllOngoingEvents()));
+        if (eventsSortType.equals("ONGOING") && eventsType.equals("MY_EVENTS"))
+            return (Objects.requireNonNull(DBConnector.getOngoingJoinedEvents(vol.getVolId())));
+        if (eventsSortType.equals("FINISHED") && eventsType.equals("ALL_EVENTS"))
+            return (Objects.requireNonNull(DBConnector.getAllFinishedEvents()));
+        if (eventsSortType.equals("FINISHED") && eventsType.equals("MY_EVENTS"))
+            return (Objects.requireNonNull(DBConnector.getFinishedJoinedEvents(vol.getVolId())));
+        return null;
+    }
+
     @FXML
     void onFinishedToggle(MouseEvent event) {
         finishedEvents_toggle.setStyle("-fx-text-fill: #0BB180");
@@ -295,7 +308,19 @@ public class AllEventsScreenController implements Initializable {
         }
     }
 
-
+    @FXML
+    void onSearchKeyPress(KeyEvent event) {
+        if (eventSearch_field.getText().trim().isBlank())
+            updateEventsPanel();
+        ArrayList<Event> events = new ArrayList<>();
+        String search = eventSearch_field.getText().trim().toLowerCase(Locale.ROOT);
+        for (Event e : getListOfEvents()) {
+            String name = e.getName().toLowerCase(Locale.ROOT);
+            if (name.startsWith(search))
+                events.add(e);
+        }
+        initializeEventsPanel(events);
+    }
 
     private void loadVolunteers(ArrayList<String> volunteers, int schedId) {
 //        ArrayList<String> volunteers = DBConnector.getVolunteers(schedId);
@@ -333,12 +358,15 @@ public class AllEventsScreenController implements Initializable {
             for (Event e : events) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/view/AllEventsCard.fxml"));
                 Node node = loader.load();
-                String date = "date";
 
-                // set onMouseClick
+                Timestamp ts = DBConnector.getUpcomingDate(e.getEvent_id());
+                String date = "Event Finished";
+                if (ts != null)
+                    date = ts.toString();
+
+                    // set onMouseClick
                 node.setOnMouseClicked((event) -> {
                     e.setSchedules(DBConnector.getEventSchedules(e.getEvent_id()));
-                    System.out.println(e.getSchedules());
                     setRightCardProperties(e);
                     selectedEvent = e;
                 });

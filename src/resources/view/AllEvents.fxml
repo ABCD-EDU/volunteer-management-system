@@ -22,7 +22,7 @@
                   <Insets left="257.0" right="257.0" />
                </padding>
                <children>
-                  <TextField fx:id="eventSearchField" prefWidth="443.0" promptText="Search in 'All Events'" style="-fx-background-color: #FEF9EF;">
+                  <TextField fx:id="eventSearch_field" onKeyPressed="#onSearchKeyPress" prefWidth="443.0" promptText="Search in 'All Events'" style="-fx-background-color: #FEF9EF;">
                      <HBox.margin>
                         <Insets top="16.0" />
                      </HBox.margin>
