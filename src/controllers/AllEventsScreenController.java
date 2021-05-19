@@ -329,7 +329,16 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onJoinEvent(ActionEvent event) {
-        // check if user is already part of event
+        Date date= new Date();
+        long time = date.getTime();
+        Timestamp ts = new Timestamp(time);
+        if (selectedSched.getStart().compareTo(ts) <= 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Cannot join. Event schedule already finished");
+            alert.showAndWait();
+            return;
+        }
+
         if (DBConnector.isVolParticipating(vol.getVolId(), selectedSched.getSchedId())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("You are already participating in this event's schedule");
@@ -450,6 +459,7 @@ public class AllEventsScreenController implements Initializable {
         }
         initializeEventsPanel(events);
     }
+
 
     @FXML
     void onMouseHover(KeyEvent event) {
@@ -581,11 +591,11 @@ public class AllEventsScreenController implements Initializable {
             Timestamp eventStart = entry.getKey();
             Timestamp eventEnd = entry.getValue();
 
-            if (eventStart.compareTo(start) > 0 && start.compareTo(eventEnd) < 0) {
-                isAvailable = false;
-            } else if (eventStart.compareTo(end) > 0 && end.compareTo(eventEnd) < 0) {
-                isAvailable = false;
-            }
+//            if (eventStart.compareTo(start) > 0 && start.compareTo(eventEnd) < 0) {
+//                isAvailable = false;
+//            } else if (eventStart.compareTo(end) > 0 && end.compareTo(eventEnd) < 0) {
+//                isAvailable = false;
+//            }
         }
 
         return isAvailable;
@@ -593,6 +603,7 @@ public class AllEventsScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         updateEventsPanel();
         name_label.setText(vol.getFirstName() + " " + vol.getLastName());
     }

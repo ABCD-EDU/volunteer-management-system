@@ -154,9 +154,6 @@ public class EditInformationController implements Initializable {
         ((Stage)changepass_cancel_button.getScene().getWindow()).close();
     }
 
-    //End change password components
-
-
 
     private void initializeLogin(String username) {
         try {
