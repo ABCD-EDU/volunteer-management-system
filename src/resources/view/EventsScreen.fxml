@@ -130,19 +130,11 @@
                                           <Insets />
                                        </VBox.margin>
                                        <children>
-                                          <Pane fx:id="rightHeader" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: #227C9D; -fx-background-radius: 10 10 0 0;">
-                                             <children>
-                                                <Label fx:id="eventName_label" alignment="CENTER" layoutX="13.0" prefHeight="50.0" prefWidth="420.0" text="Event Name" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                                                   <font>
-                                                      <Font name="System Bold" size="16.0" />
-                                                   </font>
-                                                </Label>
-                                             </children></Pane>
-                                          <ScrollPane fx:id="rightPane" layoutY="50.0" prefHeight="350.0" prefWidth="445.0" style="-fx-background: #FFCB77;">
+                                          <ScrollPane fx:id="rightPane" layoutY="50.0" prefHeight="350.0" prefWidth="445.0" style="-fx-background: #FFCB77; -fx-background-color: #FFCB77;">
                                              <content>
                                                 <VBox prefWidth="430.0">
                                                    <children>
-                                                      <Label text="Description">
+                                                      <Label fx:id="description" text="Description">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
@@ -155,7 +147,7 @@
                                                             <Insets bottom="15.0" />
                                                          </VBox.margin>
                                                       </Label>
-                                                      <Label text="Available Schedules">
+                                                      <Label fx:id="available_schedules" text="Available Schedules">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
@@ -171,7 +163,7 @@
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
                                                       </ComboBox>
-                                                      <Label text="Location">
+                                                      <Label fx:id="location" text="Location">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
@@ -186,7 +178,7 @@
                                                          <children>
                                                             <VBox>
                                                                <children>
-                                                                  <Label text="Start (Date &amp; Time)">
+                                                                  <Label fx:id="start_dateTime" text="Start (Date &amp; Time)">
                                                                      <font>
                                                                         <Font name="System Bold" size="12.0" />
                                                                      </font>
@@ -200,7 +192,7 @@
                                                             </VBox>
                                                             <VBox>
                                                                <children>
-                                                                  <Label text="End (Date &amp; Time)">
+                                                                  <Label fx:id="end_dateTime" text="End (Date &amp; Time)">
                                                                      <font>
                                                                         <Font name="System Bold" size="12.0" />
                                                                      </font>
@@ -220,7 +212,7 @@
                                                             <Insets bottom="15.0" />
                                                          </VBox.margin>
                                                       </HBox>
-                                                      <Label text="Roles">
+                                                      <Label fx:id="roles" text="Roles">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
@@ -236,7 +228,7 @@
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
                                                       </ComboBox>
-                                                      <Label text="Role Description">
+                                                      <Label fx:id="role_description" text="Role Description">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
@@ -249,7 +241,7 @@
                                                             <Insets bottom="5.0" />
                                                          </VBox.margin>
                                                       </Label>
-                                                      <Label text="Role Requirements">
+                                                      <Label fx:id="role_requirements" text="Role Requirements">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
@@ -270,6 +262,14 @@
                                                 </VBox>
                                              </content>
                                           </ScrollPane>
+                                          <Pane fx:id="rightHeader" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: #227C9D; -fx-background-radius: 10 10 0 0;">
+                                             <children>
+                                                <Label fx:id="eventName_label" alignment="CENTER" layoutX="13.0" prefHeight="50.0" prefWidth="420.0" text="Event Name" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children></Pane>
                                        </children>
                                     </Pane>
                                     <HBox prefWidth="200.0" spacing="20.0">

@@ -8,13 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import models.User;
 import models.Volunteer;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class EditInformationController implements Initializable {
@@ -144,7 +141,7 @@ public class EditInformationController implements Initializable {
 
     private void initializeLogin(String username) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/view/AllEvents.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/view/EventsScreen.fxml"));
             AllEventsScreenController controller = new AllEventsScreenController();
 
             controller.setVol(DBConnector.getVolunteer(username));

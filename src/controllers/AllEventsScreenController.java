@@ -137,6 +137,34 @@ public class AllEventsScreenController implements Initializable {
     @FXML
     private ScrollPane rightPane;
 
+    @FXML
+    private Label description;
+
+    @FXML
+    private Label available_schedules;
+
+    @FXML
+    private Label location;
+
+    @FXML
+    private Label start_dateTime;
+
+    @FXML
+    private Label end_dateTime;
+
+    @FXML
+    private Label roles;
+
+    @FXML
+    private Label role_description;
+
+    @FXML
+    private Label role_requirements;
+
+
+
+
+
     public void setVol(Volunteer vol) {
         this.vol = vol;
     }
@@ -205,14 +233,49 @@ public class AllEventsScreenController implements Initializable {
             name_label.setStyle("-fx-text-fill: #444444");
             logout_button.setStyle("-fx-text-fill: #fe6d73");
             eventsType_button.setStyle("-fx-background-color:  #227C9D; -fx-text-fill: #ffffff");
-
-        }else {
+            rightHeader.setStyle("-fx-background-color: #FFCB77");
+            eventName_label.setStyle("-fx-text-fill: #444444");
+            rightPane.setStyle("-fx-background-color: #227C9D; -fx-background: #227C9D");
+            description.setStyle("-fx-text-fill: #FFFFFF");
+            eventDesc_label.setStyle("-fx-text-fill: #FFFFFF");
+            available_schedules.setStyle("-fx-text-fill: #FFFFFF");
+            location.setStyle("-fx-text-fill: #FFFFFF");
+            start_dateTime.setStyle("-fx-text-fill: #FFFFFF");
+            startDateTime_label.setStyle("-fx-text-fill: #FFFFFF");
+            end_dateTime.setStyle("-fx-text-fill: #FFFFFF");
+            endDateTime_label.setStyle("-fx-text-fill: #FFFFFF");
+            roles.setStyle("-fx-text-fill: #FFFFFF");
+            role_description.setStyle("-fx-text-fill: #FFFFFF");
+            rolesDesc_label.setStyle("-fx-text-fill: #FFFFFF");
+            role_requirements.setStyle("-fx-text-fill: #FFFFFF");
+            programReq_label.setStyle("-fx-text-fill: #FFFFFF");
+            yearReq_label.setStyle("-fx-text-fill: #FFFFFF");
+            join_button.setDisable(true);
+        } else {
             eventsType = "ALL_EVENTS";
             windowHeader.setStyle("-fx-background-color:  #227C9D");
             editInfo_button.setStyle("-fx-text-fill: #ffffff");
             name_label.setStyle("-fx-text-fill: #ffffff");
             logout_button.setStyle("-fx-text-fill: #FFCB77");
             eventsType_button.setStyle("-fx-background-color:  #FFCB77; -fx-text-fill: #444444");
+            rightHeader.setStyle("-fx-background-color: #227C9D");
+            eventName_label.setStyle("-fx-text-fill: #FFFFFF");
+            rightPane.setStyle("-fx-background-color: #FFCB77; -fx-background: #FFCB77");
+            description.setStyle("-fx-text-fill: #444444");
+            eventDesc_label.setStyle("-fx-text-fill: #444444");
+            available_schedules.setStyle("-fx-text-fill: #444444");
+            location.setStyle("-fx-text-fill: #444444");
+            start_dateTime.setStyle("-fx-text-fill: #444444");
+            startDateTime_label.setStyle("-fx-text-fill: #444444");
+            end_dateTime.setStyle("-fx-text-fill: #444444");
+            endDateTime_label.setStyle("-fx-text-fill: #444444");
+            roles.setStyle("-fx-text-fill: #444444");
+            role_description.setStyle("-fx-text-fill: #444444");
+            rolesDesc_label.setStyle("-fx-text-fill: #444444");
+            role_requirements.setStyle("-fx-text-fill: #444444");
+            programReq_label.setStyle("-fx-text-fill: #444444");
+            yearReq_label.setStyle("-fx-text-fill: #444444");
+            join_button.setDisable(false);
         }
 
         if (eventsType_button.getText().equals("All Events"))
@@ -224,14 +287,26 @@ public class AllEventsScreenController implements Initializable {
     }
 
     private void updateEventsPanel() {
-        if (eventsSortType.equals("ONGOING") && eventsType.equals("ALL_EVENTS"))
+        if (eventsSortType.equals("ONGOING") && eventsType.equals("ALL_EVENTS")) {
+            join_button.setDisable(false);
+            concern_button.setDisable(false);
             initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents()));
-        if (eventsSortType.equals("ONGOING") && eventsType.equals("MY_EVENTS"))
+        }
+        if (eventsSortType.equals("ONGOING") && eventsType.equals("MY_EVENTS")) {
+            join_button.setDisable(true);
+            concern_button.setDisable(false);
             initializeEventsPanel(Objects.requireNonNull(DBConnector.getOngoingJoinedEvents(vol.getVolId())));
-        if (eventsSortType.equals("FINISHED") && eventsType.equals("ALL_EVENTS"))
+        }
+        if (eventsSortType.equals("FINISHED") && eventsType.equals("ALL_EVENTS")) {
+            join_button.setDisable(true);
+            concern_button.setDisable(true);
             initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllFinishedEvents()));
-        if (eventsSortType.equals("FINISHED") && eventsType.equals("MY_EVENTS"))
+        }
+        if (eventsSortType.equals("FINISHED") && eventsType.equals("MY_EVENTS")) {
+            join_button.setDisable(true);
+            concern_button.setDisable(false);
             initializeEventsPanel(Objects.requireNonNull(DBConnector.getFinishedJoinedEvents(vol.getVolId())));
+        }
     }
 
     private ArrayList<Event> getListOfEvents() {
@@ -248,9 +323,9 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onFinishedToggle(MouseEvent event) {
-        finishedEvents_toggle.setStyle("-fx-text-fill: #0BB180");
+        finishedEvents_toggle.setStyle("-fx-text-fill: #227C9D");
         finishedEvents_toggle.setText("Finished");
-        ongoingEvents_toggle.setStyle("-fx-text-fill: #9DDCC3");
+        ongoingEvents_toggle.setStyle("-fx-text-fill: #90BAC6");
         ongoingEvents_toggle.setText("Ongoing");
         eventsSortType = "FINISHED";
         updateEventsPanel();
@@ -288,9 +363,9 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onOngoingToggle(MouseEvent event) {
-        ongoingEvents_toggle.setStyle("-fx-text-fill: #0BB180");
+        ongoingEvents_toggle.setStyle("-fx-text-fill: #227C9D");
         ongoingEvents_toggle.setText("Ongoing");
-        finishedEvents_toggle.setStyle("-fx-text-fill: #9DDCC3");
+        finishedEvents_toggle.setStyle("-fx-text-fill: #90BAC6");
         finishedEvents_toggle.setText("Finished");
         eventsSortType = "ONGOING";
         updateEventsPanel();
@@ -397,6 +472,10 @@ public class AllEventsScreenController implements Initializable {
                     join_button.setDisable(!eventsSortType.equals("ONGOING"));
                 });
 
+                if (eventsType.equals("ALL_EVENTS"))
+                    ((Pane) node).setStyle("-fx-background-color: #FFCB77");
+                else ((Pane) node).setStyle("-fx-background-color: #227C9D");
+
                 // set card properties
                 for (Node component : ((VBox)(((Pane) node).getChildren()).get(0)).getChildren()) {
                     if (component.getId().equals("name_label"))
@@ -463,5 +542,4 @@ public class AllEventsScreenController implements Initializable {
         finishedEvents_toggle.setStyle("-fx-text-fill: #9DDCC3");
         finishedEvents_toggle.setText("Finished");
     }
-
 }

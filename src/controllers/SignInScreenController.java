@@ -11,10 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import models.Volunteer;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
 
 
 public class SignInScreenController {
@@ -77,7 +75,7 @@ public class SignInScreenController {
 
     private void initializeLogin(String username) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/view/AllEvents.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/view/EventsScreen.fxml"));
             AllEventsScreenController controller = new AllEventsScreenController();
 
             controller.setVol(DBConnector.getVolunteer(username));
