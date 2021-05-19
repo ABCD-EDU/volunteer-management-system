@@ -11,11 +11,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Event;
@@ -27,6 +32,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.List;
 
 public class AllEventsScreenController implements Initializable {
 
@@ -122,6 +128,15 @@ public class AllEventsScreenController implements Initializable {
     @FXML
     private Label endDateTime_label;
 
+    @FXML
+    private Pane rightCard;
+
+    @FXML
+    private Pane rightHeader;
+
+    @FXML
+    private ScrollPane rightPane;
+
     public void setVol(Volunteer vol) {
         this.vol = vol;
     }
@@ -183,10 +198,22 @@ public class AllEventsScreenController implements Initializable {
 
     @FXML
     void onEventsTypeToggle(ActionEvent event) {
-        if (eventsType.equals("ALL_EVENTS"))
+        if (eventsType.equals("ALL_EVENTS")) {
             eventsType = "MY_EVENTS";
-        else
+            windowHeader.setStyle("-fx-background-color:  #ffcb77");
+            editInfo_button.setStyle("-fx-text-fill: #444444");
+            name_label.setStyle("-fx-text-fill: #444444");
+            logout_button.setStyle("-fx-text-fill: #fe6d73");
+            eventsType_button.setStyle("-fx-background-color:  #227C9D; -fx-text-fill: #ffffff");
+
+        }else {
             eventsType = "ALL_EVENTS";
+            windowHeader.setStyle("-fx-background-color:  #227C9D");
+            editInfo_button.setStyle("-fx-text-fill: #ffffff");
+            name_label.setStyle("-fx-text-fill: #ffffff");
+            logout_button.setStyle("-fx-text-fill: #FFCB77");
+            eventsType_button.setStyle("-fx-background-color:  #FFCB77; -fx-text-fill: #444444");
+        }
 
         if (eventsType_button.getText().equals("All Events"))
             eventsType_button.setText("My Events");
@@ -227,7 +254,6 @@ public class AllEventsScreenController implements Initializable {
         ongoingEvents_toggle.setText("Ongoing");
         eventsSortType = "FINISHED";
         updateEventsPanel();
-        join_button.setDisable(true);
     }
 
     @FXML
@@ -268,8 +294,6 @@ public class AllEventsScreenController implements Initializable {
         finishedEvents_toggle.setText("Finished");
         eventsSortType = "ONGOING";
         updateEventsPanel();
-//        initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
-        join_button.setDisable(false);
     }
 
     @FXML
@@ -369,6 +393,8 @@ public class AllEventsScreenController implements Initializable {
                     e.setSchedules(DBConnector.getEventSchedules(e.getEvent_id()));
                     setRightCardProperties(e);
                     selectedEvent = e;
+
+                    join_button.setDisable(!eventsSortType.equals("ONGOING"));
                 });
 
                 // set card properties
@@ -429,19 +455,13 @@ public class AllEventsScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        initializeEventsPanel(Objects.requireNonNull(DBConnector.getAllOngoingEvents(vol.getVolId())));
         updateEventsPanel();
         name_label.setText(vol.getFirstName() + " " + vol.getLastName());
 
-        //Date object
-        Date date= new Date();
-        //getTime() returns current time in milliseconds
-        long time = date.getTime();
-        //Passed the milliseconds to constructor of Timestamp class
-        Timestamp ts = new Timestamp(time);
-
-        boolean r = checkAvailability(1, ts, ts);
-        System.out.println(r);
+        ongoingEvents_toggle.setStyle("-fx-text-fill: #0BB180");
+        ongoingEvents_toggle.setText("Ongoing");
+        finishedEvents_toggle.setStyle("-fx-text-fill: #9DDCC3");
+        finishedEvents_toggle.setText("Finished");
     }
 
 }

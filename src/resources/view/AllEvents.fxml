@@ -125,12 +125,12 @@
                            <content>
                               <VBox prefWidth="445.0">
                                  <children>
-                                    <Pane prefHeight="400.0" prefWidth="445.0" style="-fx-background-color: #FFCB77; -fx-background-radius: 10;">
+                                    <Pane fx:id="rightCard" prefHeight="400.0" prefWidth="445.0" style="-fx-background-color: #FFCB77; -fx-background-radius: 10;">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
                                        <children>
-                                          <Pane prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: #227C9D; -fx-background-radius: 10 10 0 0;">
+                                          <Pane fx:id="rightHeader" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: #227C9D; -fx-background-radius: 10 10 0 0;">
                                              <children>
                                                 <Label fx:id="eventName_label" alignment="CENTER" layoutX="13.0" prefHeight="50.0" prefWidth="420.0" text="Event Name" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                                    <font>
@@ -138,7 +138,7 @@
                                                    </font>
                                                 </Label>
                                              </children></Pane>
-                                          <ScrollPane layoutY="50.0" prefHeight="350.0" prefWidth="445.0" style="-fx-background-color: #FFCB77; -fx-background: #FFCB77;">
+                                          <ScrollPane fx:id="rightPane" layoutY="50.0" prefHeight="350.0" prefWidth="445.0" style="-fx-background: #FFCB77;">
                                              <content>
                                                 <VBox prefWidth="430.0">
                                                    <children>
